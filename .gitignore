@@ -1,0 +1,21 @@
+# Python env and caches
+.venv/
+__pycache__/
+*.pyc
+
+# Local data bundles and large artifacts
+ebnerd_small/
+synthetic_ebnerd/
+
+# Generated gate outputs (can include user-level diagnostics)
+final_preoutcome_gate_output/
+real_gate_output_v2/
+real_gate_output_v3/
+ebnerd_small_gate_output/
+ebnerd_small_gate_output_validation/
+synthetic_test_output/
+bundle_report.json
+
+# Embedding artifacts (if downloaded locally)
+bert_base_multilingual_cased.parquet
+contrastive_vector.parquet

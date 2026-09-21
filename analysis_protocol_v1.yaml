@@ -1,0 +1,144 @@
+precommit_version: phase1-parameter-freeze-v1
+freeze_date: '2026-09-21'
+seed: 20260919
+data:
+  dataset: EB-NeRD Small
+  analysis_surface: front-page impressions only
+  training_split: train
+  outcome_split: validation
+  primary_supply_window_hours: 24
+  supply_sensitivity_hours:
+  - 12
+  - 48
+  counterfactual_supply_requirement: observable_supply_count >= 3 * observed_slate_size
+  eligible_slate_size_min: 5
+  eligible_slate_size_max: 26
+  premium_choice_rule: For non-subscribers, premium items are excluded from the exposure-to-consumption
+    choice analysis.
+semantic_representation:
+  primary: contrastive_vector.parquet
+  robustness: bert_base_multilingual_cased.parquet
+  primary_dimension: 768
+  novelty_definition: 1 - mean(top-k cosine similarities between candidate article
+    and user's pre-period clicked-history articles)
+  history_similarity_k: 5
+  history_similarity_k_sensitivity:
+  - 3
+  - 10
+user_history:
+  minimum_history_length: 15
+  use_all_eligible_users: true
+  train_users_retained_share: 0.8978405864095622
+  primary_breadth_measure: Shannon entropy of publisher category distribution in pre-period
+    clicked history
+  breadth_tertile_cutpoints_from_train_eligible_users:
+    low_to_medium: 1.4638116962471364
+    medium_to_high: 1.5905145971043473
+  history_length_matching_bins_from_train_eligible_users:
+  - - 15
+    - 49
+  - - 50
+    - 111
+  - - 112
+    - 244
+  - - 245
+    - null
+matched_comparison:
+  primary_comparison: low-breadth vs high-breadth users; medium-breadth is descriptive/secondary
+  context_matching:
+    time_bucket_minutes: 30
+    device_type: exact
+    subscriber_status: exact
+    session_stage: 'exact: single/early/middle/late'
+    session_length_bin: 'exact: 1, 2, 3-5, 6+'
+    slate_size_caliper: 1
+    history_length_bin: exact using train-derived quartile bins
+  common_support:
+    primary_n_distinct_users: 3
+    definition: candidate article must have appeared in-view for >=3 distinct users
+      within the same 30-minute temporal bucket before it can be used as a primary
+      headroom substitute
+    sensitivity_n: 5
+null_slates:
+  primary: popularity_plus_recency
+  reference: uniform_random_same_size
+  draws_per_impression: 200
+  sampling_without_replacement: true
+  popularity_window_hours: 24
+  popularity_signal: number of clicks occurring before the impression only
+  weight_formula: (1 + pre_impression_clicks_24h) * 2 ** (-article_age_hours / 12)
+  new_article_rule: zero-click articles receive popularity pseudocount 1 before recency
+    decay
+  no_future_aggregate_fields:
+  - total_inviews
+  - total_pageviews
+  - total_read_time
+relevance_model:
+  training: train split only, chronologically/cross-fitted so every training diagnostic
+    score is out-of-fold
+  evaluation: validation split only
+  positives: clicked in-view items
+  negatives: in-view but unclicked items
+  primary_features:
+  - contrastive semantic similarity to user history
+  - publisher category affinity
+  - topic affinity
+  - article age/freshness
+  - pre-impression click popularity
+  - premium x subscriber interaction
+  - device type
+  - time-of-day
+  relevance_floor_rule: global 20th percentile of out-of-fold predicted relevance
+    among clicked training items
+  interpretation: A substituted item must individually clear the frozen relevance
+    floor.
+  minimum_quality_for_headroom:
+    AUC: 0.6
+    nDCG_requirement: held-out nDCG must exceed the popularity+recency baseline by
+      at least 0.01 absolute
+discovery:
+  item_level_formula: d(u,i) = novelty(u,i) if predicted_relevance(u,i) >= tau; otherwise
+    0
+  slate_level_formula: D(u,S) = mean_i d(u,i)
+  decomposition:
+  - share of slate above relevance floor
+  - mean novelty among items above relevance floor
+headroom:
+  status: stretch/conditional result, not guaranteed Phase 1 page
+  max_swaps: 2
+  primary_relevance_tolerance: 0.03
+  sensitivity_relevance_tolerances:
+  - 0.01
+  - 0.05
+  primary_substitution_pool: 24h observable supply intersected with common-support
+    n>=3
+  broader_supply_pool: sensitivity/upper-bound only
+  constraint: mean predicted relevance retained >=97% of observed slate AND every
+    swapped-in item clears relevance floor
+uncertainty:
+  bootstrap_unit: user
+  bootstrap_replicates: 2000
+  confidence_interval: 0.95
+  effect_size_practical_threshold: 0.1
+  effect_size_standardization:
+    exposure_gap: between-user SD of per-user primary exposure-gap metric in the eligible
+      matched validation sample
+    choice_gap: between-user SD of per-user exposure-to-consumption metric in the
+      eligible matched validation sample
+    headroom: between-user SD of per-user Discovery Headroom in the eligible headroom
+      sample
+interpretation_rules:
+  primary_result: stage-by-stage effect sizes, not a forced single outcome label
+  possible_interpretations:
+  - exposure-stage narrowing
+  - popularity/recency-explained narrowing
+  - choice-stage narrowing
+  - multi-stage narrowing
+  - supply-constrained environment
+  - no material effect
+  - mixed/inconclusive
+  wording_lock:
+    use: publisher-side exposure
+    do_not_use: algorithmic suppression or algorithmic gatekeeping unless producer
+      mechanism is independently established
+    headroom: retains relevance by our model's own estimate

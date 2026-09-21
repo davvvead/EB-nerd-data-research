@@ -1,0 +1,94 @@
+# Freeze these values after Gates A-C + Gate D, before computing outcome metrics.
+# Rename to precommit_parameters.yaml and commit + push remotely.
+
+precommit:
+  commit_stage: "PARAMETER_FREEZE_BEFORE_OUTCOMES"
+  dataset_bundle: null
+  behavior_file_hash: null
+  article_file_hash: null
+  embedding_file_hash: null
+  history_file_hash: null
+
+randomness:
+  master_seed: 20260919
+  sampled_user_seed: 20260919
+  baseline_draw_seed: 20260919
+
+held_out_relevance:
+  strategy: "chronological"  # or temporal_crossfit if justified before outcomes
+  train_start: null
+  train_end: null
+  validation_start: null
+  validation_end: null
+  analysis_start: null
+  analysis_end: null
+
+supply:
+  primary_window_hours: 24
+  robustness_window_hours: [12, 48]
+
+relevance_floor:
+  tau_u_rule: null
+  parameters: null
+
+common_support:
+  minimum_matched_users_n: null
+  temporal_window_minutes: null
+  context_fields: null
+
+matching:
+  history_length_bins: null
+  history_breadth_bins: null
+  prior_activity_bins: null
+  scroll_depth_bins: null
+  session_stage_rule: null
+  session_length_bins: null
+  device_exact_match: true
+  subscription_exact_match: true
+  time_caliper_minutes: null
+  slate_size_caliper: null
+
+slates:
+  eligible_slate_size_min: null
+  eligible_slate_size_max: null
+  primary_slate_rule: null
+
+user_profile:
+  history_similarity_top_k: null
+  minimum_history_length: null
+  primary_grouping: "preperiod_breadth_tertiles"
+
+sampling:
+  user_sample_size: null
+  sampling_rule: null
+
+popularity_recency_null:
+  popularity_source: "pre_impression_clicks"
+  popularity_lookback_hours: null
+  selection_rule: null  # weighted_draw or top_k
+  popularity_weight: null
+  recency_weight: null
+  recency_decay: null
+  zero_count_new_article_rule: null
+  baseline_draws_per_impression: null
+
+headroom:
+  primary_relevance_tolerance: 0.03
+  robustness_relevance_tolerance: [0.01, 0.05]
+  primary_max_swaps: null  # must be 1 or 2
+  primary_pool: "common_support"
+  sensitivity_pool: "observable_supply"
+
+practical_effects:
+  delta_sd: 0.10
+  user_aggregation_rule: null
+  exposure_gap_sd_definition: null
+  headroom_sd_definition: null
+  engagement_sd_definition: null
+
+secondary_clustering:
+  enabled: false
+  method: null
+  k: null
+  features: null
+  scaling: null

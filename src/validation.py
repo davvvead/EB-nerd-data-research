@@ -20,6 +20,7 @@ from sklearn.metrics import roc_auc_score
 from src.config import (
     ROOT_DIR,
     SEED,
+    PROTOCOL_VERSION,
     PRIMARY_HISTORY_K,
     SENSITIVITY_HISTORY_K,
     MINIMUM_HISTORY_LENGTH,
@@ -38,6 +39,116 @@ from src.embeddings import EmbeddingStore
 from src.popularity import ClickPopularityIndex
 from src.profiles import UserProfile, build_user_profiles
 from src.relevance import RelevancePipeline, compute_mean_ndcg
+
+import hashlib
+import json
+from datetime import datetime, timezone
+
+
+PRIMARY_RESULTS_FREEZE_COMMIT_HASH = "598b3553346b9be36195b074530827448fdc8e4b"
+FROZEN_PRIMARY_CACHE_PATH = CACHE_VAL_DIR / "user_article_novelty.parquet"
+FROZEN_PRIMARY_CACHE_SHA256 = "f385b64919410c596c12aafc9b10c825fbe8af5f3654a479da2f7341ae3239de"
+CONTRASTIVE_EMBEDDING_SHA256 = "fd62c019cc017c47e21c73260ee1bdf41c9903876cd00996459fac2502e24d38"
+BERT_EMBEDDING_SHA256 = "e0fcd5a7cbe252b788dae27ee0fb2a1dc85dff92b68e66a9aad66878fb773028"
+
+
+class CacheCompatibilityError(ValueError):
+    """Raised when a cached novelty file is incompatible with requested parameters."""
+    pass
+
+
+class CacheIncompleteError(ValueError):
+    """Raised when a cached novelty file is missing required user-article pairs."""
+    pass
+
+
+@dataclass(frozen=True)
+class NoveltyCacheMetadata:
+    """Metadata schema recorded alongside every cached novelty file."""
+    cache_version: str
+    embedding_type: str
+    embedding_file_sha256: str
+    candidate_universe: str
+    supply_window_hours: Optional[int]
+    k_values: List[int]
+    user_count: int
+    user_article_pair_count: int
+    protocol_version: str
+    seed: int
+    created_at_utc: str
+    source_primary_freeze_commit_hash: str
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "cache_version": self.cache_version,
+            "embedding_type": self.embedding_type,
+            "embedding_file_sha256": self.embedding_file_sha256,
+            "candidate_universe": self.candidate_universe,
+            "supply_window_hours": self.supply_window_hours,
+            "k_values": list(self.k_values),
+            "user_count": self.user_count,
+            "user_article_pair_count": self.user_article_pair_count,
+            "protocol_version": self.protocol_version,
+            "seed": self.seed,
+            "created_at_utc": self.created_at_utc,
+            "source_primary_freeze_commit_hash": self.source_primary_freeze_commit_hash,
+        }
+
+
+def assert_novelty_cache_compatibility(
+    cache_df: pd.DataFrame,
+    meta: Dict[str, Any],
+    requested_embedding_type: str,
+    requested_embedding_sha: Optional[str] = None,
+    requested_k_values: Sequence[int] = (3, 5, 10),
+    required_pairs: Optional[Set[Tuple[int, int]]] = None,
+    cache_path: Optional[Path] = None,
+) -> None:
+    """
+    Assert that an existing cache is strictly compatible with requested analysis parameters.
+    Raises CacheCompatibilityError or CacheIncompleteError on mismatch.
+    """
+    # 1. Embedding type check
+    cached_emb = meta.get("embedding_type", "").lower()
+    req_emb = requested_embedding_type.lower()
+    if cached_emb in ("bert", "bert_multilingual"):
+        cached_emb = "bert"
+    if req_emb in ("bert", "bert_multilingual"):
+        req_emb = "bert"
+    if cached_emb != req_emb:
+        raise CacheCompatibilityError(
+            f"Embedding type mismatch for cache {cache_path}: cache contains '{meta.get('embedding_type')}', but requested '{requested_embedding_type}'."
+        )
+
+    # 2. Embedding SHA check
+    cached_sha = meta.get("embedding_file_sha256", "")
+    if cached_sha and requested_embedding_sha and cached_sha != requested_embedding_sha:
+        raise CacheCompatibilityError(
+            f"Embedding file SHA-256 mismatch for cache {cache_path}: cache has '{cached_sha}', requested '{requested_embedding_sha}'."
+        )
+
+    # 3. Protocol version check
+    if meta.get("protocol_version") and meta.get("protocol_version") != PROTOCOL_VERSION:
+        raise CacheCompatibilityError(
+            f"Protocol version mismatch for cache {cache_path}: cache has '{meta.get('protocol_version')}', expected '{PROTOCOL_VERSION}'."
+        )
+
+    # 4. Check requested k values
+    for k in requested_k_values:
+        col = f"novelty_k{k}"
+        if col not in cache_df.columns:
+            raise CacheCompatibilityError(
+                f"Requested k={k} column '{col}' missing from cache {cache_path}. Available columns: {list(cache_df.columns)}"
+            )
+
+    # 5. Check pair coverage
+    if required_pairs:
+        cached_pairs = set(zip(cache_df["user_id"], cache_df["article_id"]))
+        missing = required_pairs - cached_pairs
+        if missing:
+            raise CacheIncompleteError(
+                f"Cache {cache_path} is incomplete: missing {len(missing):,} required user-article pairs ({len(missing)/len(required_pairs):.2%})."
+            )
 
 VALIDATION_BEHAVIOR_START_TIME = pd.Timestamp("2023-05-25T07:00:00Z")
 
@@ -171,16 +282,97 @@ def precompute_novelty_cache(
     profiles: Dict[int, UserProfile],
     embedding_store: EmbeddingStore,
     k_values: Tuple[int, ...] = (3, 5, 10),
-    output_path: Optional[Path] = None,
+    output_path: Optional[Union[Path, str]] = None,
+    embedding_type: Optional[str] = None,
+    embedding_sha256: Optional[str] = None,
+    supply_window_hours: Optional[int] = None,
+    candidate_universe: Optional[str] = None,
+    force_recompute: bool = False,
 ) -> pd.DataFrame:
     """
-    Compute user_history x candidate_article semantic novelty once across all needed pairs.
-    Returns DataFrame with columns: user_id, article_id, novelty_k3, novelty_k5, novelty_k10.
-    Optionally saves to cache/validation/user_article_novelty.parquet.
+    Compute or load user_history x candidate_article semantic novelty with strict compatibility assertions.
+    Guarantees:
+      1. Primary frozen cache cannot be overwritten.
+      2. Mismatched embedding types (e.g. BERT vs Contrastive) raise CacheCompatibilityError.
+      3. Mismatched embedding weights raise CacheCompatibilityError.
+      4. Missing pairs raise CacheIncompleteError.
+      5. Companion metadata is validated on read and written on generate.
     """
-    if output_path is not None and Path(output_path).exists():
-        return pd.read_parquet(output_path)
+    if embedding_type is None:
+        embedding_type = embedding_store.name
+    if embedding_sha256 is None:
+        emb_norm = embedding_store.name.lower()
+        if emb_norm in ("bert", "bert_multilingual"):
+            embedding_sha256 = BERT_EMBEDDING_SHA256
+        else:
+            embedding_sha256 = CONTRASTIVE_EMBEDDING_SHA256
 
+    if candidate_universe is None:
+        candidate_universe = f"observable_supply_{supply_window_hours}h" if supply_window_hours else "custom_supply"
+
+    # Build required pair set
+    required_pairs: Set[Tuple[int, int]] = set()
+    for uid, cand_set in user_ids_and_candidates.items():
+        if uid in profiles:
+            for aid in cand_set:
+                required_pairs.add((uid, aid))
+
+    # Check existing cache
+    if output_path is not None and Path(output_path).exists() and not force_recompute:
+        p = Path(output_path)
+        meta_p1 = p.parent / f"{p.stem}.meta.json"
+        meta_p2 = p.with_suffix(".parquet.meta.json")
+
+        meta = None
+        if meta_p1.exists():
+            meta = json.loads(meta_p1.read_text())
+        elif meta_p2.exists():
+            meta = json.loads(meta_p2.read_text())
+        elif p.resolve() == FROZEN_PRIMARY_CACHE_PATH.resolve():
+            file_sha = hashlib.sha256(p.read_bytes()).hexdigest()
+            if file_sha == FROZEN_PRIMARY_CACHE_SHA256:
+                meta = {
+                    "cache_version": "v1",
+                    "embedding_type": "contrastive",
+                    "embedding_file_sha256": CONTRASTIVE_EMBEDDING_SHA256,
+                    "candidate_universe": "observable_supply_24h_plus_slates",
+                    "supply_window_hours": 24,
+                    "k_values": [3, 5, 10],
+                    "user_count": 11967,
+                    "user_article_pair_count": 5908301,
+                    "protocol_version": PROTOCOL_VERSION,
+                    "seed": SEED,
+                    "created_at_utc": "2026-09-22T03:26:45.054027+00:00",
+                    "source_primary_freeze_commit_hash": PRIMARY_RESULTS_FREEZE_COMMIT_HASH,
+                }
+            else:
+                raise CacheCompatibilityError(
+                    f"Primary cache at {p} has altered SHA-256 ({file_sha} != {FROZEN_PRIMARY_CACHE_SHA256})."
+                )
+        else:
+            raise CacheCompatibilityError(
+                f"Missing companion metadata for cache {p}. Expected {meta_p1}."
+            )
+
+        cache_df = pd.read_parquet(p)
+        assert_novelty_cache_compatibility(
+            cache_df=cache_df,
+            meta=meta,
+            requested_embedding_type=embedding_type,
+            requested_embedding_sha=embedding_sha256,
+            requested_k_values=k_values,
+            required_pairs=required_pairs,
+            cache_path=p,
+        )
+        return cache_df
+
+    # Safety: Cannot overwrite frozen primary cache
+    if output_path is not None and Path(output_path).resolve() == FROZEN_PRIMARY_CACHE_PATH.resolve():
+        raise PermissionError(
+            f"Cannot overwrite frozen primary cache: {FROZEN_PRIMARY_CACHE_PATH} is read-only."
+        )
+
+    # Compute novelty from embedding store
     records = []
     for uid, cand_set in user_ids_and_candidates.items():
         if uid not in profiles:
@@ -207,9 +399,27 @@ def precompute_novelty_cache(
 
     df_cache = pd.DataFrame(records)
     if output_path is not None:
-        output_path = Path(output_path)
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        df_cache.to_parquet(output_path, index=False)
+        p = Path(output_path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        df_cache.to_parquet(p, index=False)
+
+        # Write companion metadata
+        meta_obj = NoveltyCacheMetadata(
+            cache_version="v1",
+            embedding_type=embedding_type,
+            embedding_file_sha256=embedding_sha256,
+            candidate_universe=candidate_universe,
+            supply_window_hours=supply_window_hours,
+            k_values=list(k_values),
+            user_count=int(df_cache["user_id"].nunique()) if not df_cache.empty else 0,
+            user_article_pair_count=len(df_cache),
+            protocol_version=PROTOCOL_VERSION,
+            seed=SEED,
+            created_at_utc=datetime.now(timezone.utc).isoformat(),
+            source_primary_freeze_commit_hash=PRIMARY_RESULTS_FREEZE_COMMIT_HASH,
+        )
+        meta_path = p.parent / f"{p.stem}.meta.json"
+        meta_path.write_text(json.dumps(meta_obj.to_dict(), indent=2))
 
     return df_cache
 

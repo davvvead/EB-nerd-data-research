@@ -1,6 +1,73 @@
 {
   "variant": "headroom_retention_95",
-  "status": "PENDING_EXECUTION",
-  "outcomes_computed": false,
-  "output_directory": "outputs/robustness/headroom_retention_95"
+  "status": "COMPLETED",
+  "outcomes_computed": true,
+  "output_directory": "outputs/robustness/headroom_retention_95",
+  "timestamp_utc": "2026-09-22T05:00:50.348660+00:00",
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "seed": 20260919,
+  "runtime_seconds": 242.33241800000542,
+  "changed_components": [
+    "Headroom parameter: relevance_retention_tolerance=0.05"
+  ],
+  "frozen_components": [
+    "Stage 1 Available -> Exposed (identical to primary)",
+    "Stage 2 Exposed -> Consumed (identical to primary)",
+    "Matched breadth comparison (identical to primary)",
+    "Production relevance model (relevance_model.joblib)",
+    "Relevance floor tau (0.098570)",
+    "Semantic novelty definition (k=5 contrastive)",
+    "Observable supply window (24h)"
+  ],
+  "generated_files": [
+    {
+      "path": "outputs/robustness/headroom_retention_95/stage_effects.json",
+      "size_bytes": 1970,
+      "sha256": "a32db071891262b2cfb73c3c9e4f9e7ef767f2f0b083c1a9ffb76e6cc691b6c8"
+    },
+    {
+      "path": "outputs/robustness/headroom_retention_95/null_comparison.json",
+      "size_bytes": 870,
+      "sha256": "dac2ce305b82fcdb3848f7c7da08dc0efdca6060103a7276bfd4ad80c6b03004"
+    },
+    {
+      "path": "outputs/robustness/headroom_retention_95/breadth_comparison.json",
+      "size_bytes": 1141,
+      "sha256": "b1cdc1012e3b0486d89e46f924c32a53b68931d9abda9c2ab1c4a58ef0a160f6"
+    },
+    {
+      "path": "outputs/robustness/headroom_retention_95/headroom.json",
+      "size_bytes": 690,
+      "sha256": "1f912e83634cbc90082019441f280cdad8a05c93ce9045759c7ce4d446945fd4"
+    },
+    {
+      "path": "outputs/robustness/headroom_retention_95/tidy_impression_outcomes.csv",
+      "size_bytes": 73058445,
+      "sha256": "df44434ee5e57fa07f57d85a2bfe862484648f9f5ac084bfe0965776ce7519b4"
+    },
+    {
+      "path": "outputs/robustness/headroom_retention_95/tidy_matched_pairs.csv",
+      "size_bytes": 2905651,
+      "sha256": "a471f5b3fe8034fb9426e85e820448ce17c762ea0024974903b4fa68ce016eaf"
+    },
+    {
+      "path": "outputs/robustness/headroom_retention_95/tidy_user_aggregates.csv",
+      "size_bytes": 1071297,
+      "sha256": "7adf8a8eed2e12a72ba7945f454085bf54001003ecdb4d72ea63be7bbd21ac00"
+    }
+  ],
+  "summary_metrics": {
+    "eligible_impressions": 156580,
+    "eligible_users": 11967,
+    "mean_headroom_discovery_gain": 0.152100258696461,
+    "headroom_median_gain": 0.13317538425326347,
+    "headroom_ci_95": [
+      0.15135735764999741,
+      0.15287915728996518
+    ],
+    "headroom_std_effect": 3.648734125369994,
+    "share_with_positive_headroom": 0.9999872269766253,
+    "average_swaps_used": 1.9999489079065014,
+    "average_modeled_relevance_retention": 1.2474081651880857
+  }
 }

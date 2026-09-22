@@ -1,6 +1,93 @@
 {
   "variant": "novelty_k10",
-  "status": "PENDING_EXECUTION",
-  "outcomes_computed": false,
-  "output_directory": "outputs/robustness/novelty_k10"
+  "status": "COMPLETED",
+  "outcomes_computed": true,
+  "output_directory": "outputs/robustness/novelty_k10",
+  "timestamp_utc": "2026-09-22T04:48:31.303749+00:00",
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "seed": 20260919,
+  "runtime_seconds": 502.91581408301136,
+  "changed_components": [
+    "Novelty metric: novelty_k10 (contrastive)",
+    "All 4 discovery dimensions recomputed"
+  ],
+  "frozen_components": [
+    "Deterministic matching pairs (12,243 pairs)",
+    "Production relevance model (relevance_model.joblib)",
+    "Relevance floor tau (0.098570)",
+    "Supply window (24h)",
+    "Impression and user eligibility"
+  ],
+  "generated_files": [
+    {
+      "path": "outputs/robustness/novelty_k10/stage_effects.json",
+      "size_bytes": 1876,
+      "sha256": "cc178116d7adeddaf6246b06daadca4d13946718f477f564d5f560d159b3edb6"
+    },
+    {
+      "path": "outputs/robustness/novelty_k10/null_comparison.json",
+      "size_bytes": 721,
+      "sha256": "f5c9d2a11e0b45cab02622046ed251c70dab939747246ed6b14c22b53da98b21"
+    },
+    {
+      "path": "outputs/robustness/novelty_k10/breadth_comparison.json",
+      "size_bytes": 484,
+      "sha256": "b41b92b37b46c2f2ba1c378939760c5246d0d839f842f1c1ce160b5900316b84"
+    },
+    {
+      "path": "outputs/robustness/novelty_k10/headroom.json",
+      "size_bytes": 591,
+      "sha256": "45ee2057e64287e14fb97fab3458ae652b86aea735afc26a4b08b2cfd2e9e850"
+    },
+    {
+      "path": "outputs/robustness/novelty_k10/tidy_impression_outcomes.csv",
+      "size_bytes": 75031403,
+      "sha256": "9a65b7c3cefdde3ce2f65e1c4678cf39845411d54d03865be434ed2d0d76fb2e"
+    },
+    {
+      "path": "outputs/robustness/novelty_k10/tidy_matched_pairs.csv",
+      "size_bytes": 2962937,
+      "sha256": "488db8a75a6f56ee872d8cecb95a7e3abb3a05d1abef2d816a870ed7b33c6a5a"
+    },
+    {
+      "path": "outputs/robustness/novelty_k10/tidy_user_aggregates.csv",
+      "size_bytes": 1073176,
+      "sha256": "8f54c5049a3f59e4428c759a3ff24620d211648af0ec57ff39126c374a70519f"
+    }
+  ],
+  "summary_metrics": {
+    "eligible_impressions": 156580,
+    "eligible_users": 11967,
+    "available_to_exposed_discovery_gap": -0.1926961270019754,
+    "available_to_exposed_ci_95": [
+      -0.1940752495307313,
+      -0.19136334978947353
+    ],
+    "available_to_exposed_std_effect": -2.5060439600929305,
+    "available_coverage_gap": -0.3760709607821487,
+    "available_cond_nov_gap": -0.030052751282011115,
+    "exposed_to_consumed_choice_gap": 0.10179038678412526,
+    "exposed_to_consumed_ci_95": [
+      0.09962207029375457,
+      0.10400847645766866
+    ],
+    "exposed_to_consumed_std_effect": 0.8459740055341769,
+    "choice_cond_nov_gap": -0.010037164253204413,
+    "matched_breadth_difference": 0.0077335856510834374,
+    "matched_breadth_ci_95": [
+      0.0035118423042238664,
+      0.012191258351815469
+    ],
+    "matched_breadth_std_effect": 0.07243663234918417,
+    "mean_headroom_discovery_gain": 0.16283498163713456,
+    "headroom_median_gain": 0.14299575005258833,
+    "headroom_ci_95": [
+      0.16204152236866012,
+      0.16365198125706443
+    ],
+    "headroom_std_effect": 3.6713045674058784,
+    "share_with_positive_headroom": 0.9999872269766253,
+    "average_swaps_used": 1.9999297483714396,
+    "average_modeled_relevance_retention": 1.2481069413651726
+  }
 }

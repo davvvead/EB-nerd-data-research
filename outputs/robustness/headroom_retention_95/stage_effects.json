@@ -1,0 +1,67 @@
+{
+  "available_to_exposed": {
+    "metric": "observed_discovery - mean_null_discovery",
+    "point_estimate": -0.16830897257365787,
+    "ci_95": [
+      -0.16952420407063373,
+      -0.16714266792091792
+    ],
+    "std_error": 0.0006166208508625446,
+    "between_user_sd": 0.0670631772482078,
+    "standardized_effect": -2.5097077036885507,
+    "practical_significance": true,
+    "n_users": 11967,
+    "decomposition": {
+      "relevance_coverage_gap": {
+        "point_estimate": -0.3760709607821487,
+        "ci_95": [
+          -0.37848083065367016,
+          -0.3735345009642545
+        ],
+        "standardized_effect": -2.7253847094482984
+      },
+      "conditional_novelty_gap": {
+        "point_estimate": -0.0318227920520169,
+        "ci_95": [
+          -0.032603093522688094,
+          -0.031084540312738884
+        ],
+        "standardized_effect": -0.7238770108070708
+      }
+    }
+  },
+  "exposed_to_consumed": {
+    "metric": "consumed_discovery - choosable_exposed_discovery",
+    "point_estimate": 0.08551254573364066,
+    "ci_95": [
+      0.08364552707978143,
+      0.08746741360658508
+    ],
+    "std_error": 0.0009653541785937373,
+    "between_user_sd": 0.10585701310470769,
+    "standardized_effect": 0.8078118135551071,
+    "practical_significance": true,
+    "eligible_impressions": 148211,
+    "n_users": 11885,
+    "decomposition": {
+      "relevance_coverage_gap": {
+        "point_estimate": 0.2424027178040791,
+        "ci_95": [
+          0.23863263636905838,
+          0.2462300843964752
+        ],
+        "standardized_effect": 1.1575357636908468
+      },
+      "conditional_novelty_gap": {
+        "point_estimate": -0.00941397703686886,
+        "ci_95": [
+          -0.010409019446613344,
+          -0.008404032626311746
+        ],
+        "standardized_effect": -0.1628600791438935
+      }
+    }
+  },
+  "variant": "headroom_retention_95",
+  "note": "Stage 1 and Stage 2 are frozen identical to primary. Only Headroom is recomputed."
+}

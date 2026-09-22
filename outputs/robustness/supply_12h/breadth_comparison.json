@@ -1,0 +1,17 @@
+{
+  "variant": "supply_12h",
+  "matched_pairs_analyzed": 11651,
+  "mean_low_discovery": 0.15321591842805096,
+  "mean_high_discovery": 0.15863080764084914,
+  "difference_high_minus_low": {
+    "point_estimate": 0.0068665871803892135,
+    "ci_95": [
+      0.0029735353870594876,
+      0.010582455433869724
+    ],
+    "std_error": 0.001906970179612478,
+    "between_user_sd": 0.09288737867995617,
+    "standardized_effect": 0.07392379113257214,
+    "practical_significance": false
+  }
+}

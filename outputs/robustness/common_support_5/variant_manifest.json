@@ -1,6 +1,73 @@
 {
   "variant": "common_support_5",
-  "status": "PENDING_EXECUTION",
-  "outcomes_computed": false,
-  "output_directory": "outputs/robustness/common_support_5"
+  "status": "COMPLETED",
+  "outcomes_computed": true,
+  "output_directory": "outputs/robustness/common_support_5",
+  "timestamp_utc": "2026-09-22T04:52:36.852004+00:00",
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "seed": 20260919,
+  "runtime_seconds": 240.9818798339984,
+  "changed_components": [
+    "Headroom parameter: common_support_n=5"
+  ],
+  "frozen_components": [
+    "Stage 1 Available -> Exposed (identical to primary)",
+    "Stage 2 Exposed -> Consumed (identical to primary)",
+    "Matched breadth comparison (identical to primary)",
+    "Production relevance model (relevance_model.joblib)",
+    "Relevance floor tau (0.098570)",
+    "Semantic novelty definition (k=5 contrastive)",
+    "Observable supply window (24h)"
+  ],
+  "generated_files": [
+    {
+      "path": "outputs/robustness/common_support_5/stage_effects.json",
+      "size_bytes": 1965,
+      "sha256": "66a3b1d27240968bd4544e4f042d64c8b228241aed8384cb12700e85eee167b3"
+    },
+    {
+      "path": "outputs/robustness/common_support_5/null_comparison.json",
+      "size_bytes": 865,
+      "sha256": "5436c62e089718e57c6872938e01ccd644105dbdbb60c35b71b84ea07afd11f5"
+    },
+    {
+      "path": "outputs/robustness/common_support_5/breadth_comparison.json",
+      "size_bytes": 1136,
+      "sha256": "9cae641c4ab5bea86848469edd4f8753519acd863dafc6bd72074d9e7ca3d5a0"
+    },
+    {
+      "path": "outputs/robustness/common_support_5/headroom.json",
+      "size_bytes": 687,
+      "sha256": "432534a67730f192a6414a811b24707fb5df9faf4fe6e1c9cb53936a45ba2b5a"
+    },
+    {
+      "path": "outputs/robustness/common_support_5/tidy_impression_outcomes.csv",
+      "size_bytes": 73058923,
+      "sha256": "71c4c0c6f87af7d9fb049c2105198e204c9f17d2a7e2ab3358eac9b4b483b2be"
+    },
+    {
+      "path": "outputs/robustness/common_support_5/tidy_matched_pairs.csv",
+      "size_bytes": 2905651,
+      "sha256": "a471f5b3fe8034fb9426e85e820448ce17c762ea0024974903b4fa68ce016eaf"
+    },
+    {
+      "path": "outputs/robustness/common_support_5/tidy_user_aggregates.csv",
+      "size_bytes": 1071444,
+      "sha256": "35c79dbed74a7ec21fb1fc4ab2832bc610e734639fc30db1c2b0456666028d55"
+    }
+  ],
+  "summary_metrics": {
+    "eligible_impressions": 156580,
+    "eligible_users": 11967,
+    "mean_headroom_discovery_gain": 0.15040969740225757,
+    "headroom_median_gain": 0.13142703846096992,
+    "headroom_ci_95": [
+      0.1496638931762589,
+      0.15117693378008992
+    ],
+    "headroom_std_effect": 3.6265821894238317,
+    "share_with_positive_headroom": 0.9999552944181888,
+    "average_swaps_used": 1.9997892451143187,
+    "average_modeled_relevance_retention": 1.2494327432995687
+  }
 }

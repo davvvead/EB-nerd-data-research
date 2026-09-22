@@ -1,0 +1,16 @@
+{
+  "cache_version": "v1",
+  "embedding_type": "bert",
+  "embedding_file_sha256": "e0fcd5a7cbe252b788dae27ee0fb2a1dc85dff92b68e66a9aad66878fb773028",
+  "candidate_universe": "observable_supply_24h_plus_slates",
+  "supply_window_hours": 24,
+  "k_values": [
+    5
+  ],
+  "user_count": 11967,
+  "user_article_pair_count": 5908301,
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "seed": 20260919,
+  "created_at_utc": "2026-09-22T04:23:13.274346+00:00",
+  "source_primary_freeze_commit_hash": "598b3553346b9be36195b074530827448fdc8e4b"
+}

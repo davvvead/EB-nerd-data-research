@@ -1,0 +1,17 @@
+{
+  "variant": "novelty_k10",
+  "matched_pairs_analyzed": 12243,
+  "mean_low_discovery": 0.18179234293940835,
+  "mean_high_discovery": 0.1881395439751981,
+  "difference_high_minus_low": {
+    "point_estimate": 0.0077335856510834374,
+    "ci_95": [
+      0.0035118423042238664,
+      0.012191258351815469
+    ],
+    "std_error": 0.0022138555167756364,
+    "between_user_sd": 0.10676346208094445,
+    "standardized_effect": 0.07243663234918417,
+    "practical_significance": false
+  }
+}

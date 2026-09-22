@@ -1,0 +1,66 @@
+{
+  "variant": "supply_48h",
+  "available_to_exposed": {
+    "metric": "observed_discovery - mean_null_discovery",
+    "point_estimate": -0.15849099501027927,
+    "ci_95": [
+      -0.15967101231066352,
+      -0.1573450702393123
+    ],
+    "std_error": 0.0006022548193930292,
+    "between_user_sd": 0.06549944219091222,
+    "standardized_effect": -2.4197304543193385,
+    "practical_significance": true,
+    "n_impressions": 156580,
+    "n_users": 11967,
+    "decomposition": {
+      "relevance_coverage_gap": {
+        "point_estimate": -0.35416033307380523,
+        "ci_95": [
+          -0.3565780285409343,
+          -0.35162663193011656
+        ],
+        "standardized_effect": -2.5896348445708406
+      },
+      "conditional_novelty_gap": {
+        "point_estimate": -0.030933229139665393,
+        "ci_95": [
+          -0.03171626767053515,
+          -0.03018645382841833
+        ],
+        "standardized_effect": -0.7036096828510996
+      }
+    }
+  },
+  "exposed_to_consumed": {
+    "metric": "consumed_discovery - choosable_exposed_discovery",
+    "point_estimate": 0.08551254573364066,
+    "ci_95": [
+      0.08364552707978143,
+      0.08746741360658508
+    ],
+    "std_error": 0.0009653541785937373,
+    "between_user_sd": 0.10585701310470769,
+    "standardized_effect": 0.8078118135551071,
+    "practical_significance": true,
+    "n_eligible_impressions": 148211,
+    "decomposition": {
+      "relevance_coverage_gap": {
+        "point_estimate": 0.2424027178040791,
+        "ci_95": [
+          0.23863263636905838,
+          0.2462300843964752
+        ],
+        "standardized_effect": 1.1575357636908468
+      },
+      "conditional_novelty_gap": {
+        "point_estimate": -0.00941397703686886,
+        "ci_95": [
+          -0.010409019446613344,
+          -0.008404032626311746
+        ],
+        "standardized_effect": -0.1628600791438935
+      }
+    }
+  }
+}

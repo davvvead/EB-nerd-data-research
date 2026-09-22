@@ -1,0 +1,18 @@
+{
+  "variant": "novelty_k10",
+  "status": "QUALIFIED",
+  "eligible_impressions": 156580,
+  "share_with_positive_headroom": 0.9999872269766253,
+  "mean_headroom_discovery_gain": 0.14963173942107674,
+  "median_headroom_discovery_gain": 0.14299575005258833,
+  "ci_95": [
+    0.16204152236866012,
+    0.16365198125706443
+  ],
+  "std_error": 0.00040510328130752727,
+  "between_user_sd": 0.044353438579516374,
+  "standardized_magnitude": 3.6713045674058784,
+  "practical_significance": true,
+  "average_swaps_used": 1.9999297483714396,
+  "average_modeled_relevance_retention": 1.2481069413651726
+}

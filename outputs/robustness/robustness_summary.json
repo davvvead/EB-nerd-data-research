@@ -1,0 +1,326 @@
+{
+  "status": "ROBUSTNESS_BATTERY_COMPLETE",
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "seed": 20260919,
+  "timestamp_utc": "2026-09-22T05:10:55.302207+00:00",
+  "available_to_exposed": [
+    {
+      "specification": "Primary 24h Contrastive k5",
+      "variant": "primary_baseline",
+      "eligible_impressions": 156580,
+      "eligible_users": 11967,
+      "discovery_gap": -0.16830897257365787,
+      "ci_95": [
+        -0.16952420407063373,
+        -0.16714266792091792
+      ],
+      "std_effect": -2.5097077036885507,
+      "coverage_gap": -0.3760709607821487,
+      "conditional_novelty_gap": -0.0318227920520169
+    },
+    {
+      "specification": "Supply 12H",
+      "variant": "supply_12h",
+      "eligible_impressions": 142368,
+      "eligible_users": 11820,
+      "discovery_gap": -0.17195336526084018,
+      "ci_95": [
+        -0.17325365353047792,
+        -0.170698652945369
+      ],
+      "std_effect": -2.4796425799303816,
+      "coverage_gap": -0.38656363963655105,
+      "conditional_novelty_gap": -0.031938554374159614
+    },
+    {
+      "specification": "Supply 48H",
+      "variant": "supply_48h",
+      "eligible_impressions": 156580,
+      "eligible_users": 11967,
+      "discovery_gap": -0.15849099501027927,
+      "ci_95": [
+        -0.15967101231066352,
+        -0.1573450702393123
+      ],
+      "std_effect": -2.4197304543193385,
+      "coverage_gap": -0.35416033307380523,
+      "conditional_novelty_gap": -0.030933229139665393
+    },
+    {
+      "specification": "Bert",
+      "variant": "bert",
+      "eligible_impressions": 156580,
+      "eligible_users": 11967,
+      "discovery_gap": -0.008061380648977393,
+      "ci_95": [
+        -0.008192148956846454,
+        -0.00792439912833371
+      ],
+      "std_effect": -1.0762648534095336,
+      "coverage_gap": -0.3760709607821487,
+      "conditional_novelty_gap": -0.00020342949383167958
+    },
+    {
+      "specification": "Novelty K3",
+      "variant": "novelty_k3",
+      "eligible_impressions": 156580,
+      "eligible_users": 11967,
+      "discovery_gap": -0.1529145003923555,
+      "ci_95": [
+        -0.1540139959216455,
+        -0.15184397166902983
+      ],
+      "std_effect": -2.5116079402810274,
+      "coverage_gap": -0.3760709607821487,
+      "conditional_novelty_gap": -0.0313052361524132
+    },
+    {
+      "specification": "Novelty K10",
+      "variant": "novelty_k10",
+      "eligible_impressions": 156580,
+      "eligible_users": 11967,
+      "discovery_gap": -0.1926961270019754,
+      "ci_95": [
+        -0.1940752495307313,
+        -0.19136334978947353
+      ],
+      "std_effect": -2.5060439600929305,
+      "coverage_gap": -0.3760709607821487,
+      "conditional_novelty_gap": -0.030052751282011115
+    }
+  ],
+  "exposed_to_consumed": [
+    {
+      "specification": "Primary 24h Contrastive k5",
+      "variant": "primary_baseline",
+      "discovery_gap": 0.08551254573364066,
+      "ci_95": [
+        0.08364552707978143,
+        0.08746741360658508
+      ],
+      "std_effect": 0.8078118135551071,
+      "conditional_novelty_gap": -0.00941397703686886
+    },
+    {
+      "specification": "Bert",
+      "variant": "bert",
+      "discovery_gap": 0.004878371263255305,
+      "ci_95": [
+        0.004504835798109207,
+        0.005294798587285454
+      ],
+      "std_effect": 0.22265214859961335,
+      "conditional_novelty_gap": -0.00011804456579587242
+    },
+    {
+      "specification": "Novelty K3",
+      "variant": "novelty_k3",
+      "discovery_gap": 0.07656012755796192,
+      "ci_95": [
+        0.0747953442562636,
+        0.07836356702355367
+      ],
+      "std_effect": 0.7834858580528391,
+      "conditional_novelty_gap": -0.008468977774990828
+    },
+    {
+      "specification": "Novelty K10",
+      "variant": "novelty_k10",
+      "discovery_gap": 0.10179038678412526,
+      "ci_95": [
+        0.09962207029375457,
+        0.10400847645766866
+      ],
+      "std_effect": 0.8459740055341769,
+      "conditional_novelty_gap": -0.010037164253204413
+    }
+  ],
+  "matched_breadth": [
+    {
+      "specification": "Primary 24h Contrastive k5",
+      "variant": "primary_baseline",
+      "matched_diff": 0.006754433789754616,
+      "ci_95": [
+        0.00306991891086978,
+        0.010704556260634953
+      ],
+      "std_effect": 0.0736695677214558
+    },
+    {
+      "specification": "Bert",
+      "variant": "bert",
+      "matched_diff": 0.0006297665464193494,
+      "ci_95": [
+        0.00019975368503890532,
+        0.0010424009612081129
+      ],
+      "std_effect": 0.05993393198188087
+    },
+    {
+      "specification": "Novelty K3",
+      "variant": "novelty_k3",
+      "matched_diff": 0.005798508102993209,
+      "ci_95": [
+        0.0024883198578412977,
+        0.009290719691155082
+      ],
+      "std_effect": 0.06973836105495541
+    },
+    {
+      "specification": "Novelty K10",
+      "variant": "novelty_k10",
+      "matched_diff": 0.0077335856510834374,
+      "ci_95": [
+        0.0035118423042238664,
+        0.012191258351815469
+      ],
+      "std_effect": 0.07243663234918417
+    }
+  ],
+  "headroom": [
+    {
+      "specification": "Primary 24h Contrastive k5 (CS>=3, ret>=97%)",
+      "variant": "primary_baseline",
+      "eligible_n": 156580,
+      "positive_share": 0.9999872269766253,
+      "mean_gain": 0.152011,
+      "impression_weighted_mean": 0.13927879668358537,
+      "median_gain": 0.13299512384193285,
+      "ci_95": [
+        0.15124921227474933,
+        0.15277368510553363
+      ],
+      "std_effect": 3.6440254089830892,
+      "mean_swaps": 1.9999169753480648,
+      "mean_retention": 1.2480631769800907
+    },
+    {
+      "specification": "Supply 12H",
+      "variant": "supply_12h",
+      "eligible_n": 142368,
+      "positive_share": 0.9999929759496516,
+      "mean_gain": 0.15306967214740388,
+      "impression_weighted_mean": 0.13965050152728892,
+      "median_gain": 0.13347222478616805,
+      "ci_95": [
+        0.15229412282022542,
+        0.1537897329850023
+      ],
+      "std_effect": 3.8034380299446178,
+      "mean_swaps": 1.9998243987412903,
+      "mean_retention": 1.2658941932798438
+    },
+    {
+      "specification": "Supply 48H",
+      "variant": "supply_48h",
+      "eligible_n": 156580,
+      "positive_share": 0.9999872269766253,
+      "mean_gain": 0.15309457970605078,
+      "impression_weighted_mean": 0.14050647361850116,
+      "median_gain": 0.13440797064039442,
+      "ci_95": [
+        0.15233721216269064,
+        0.15386413856158815
+      ],
+      "std_effect": 3.664398175277378,
+      "mean_swaps": 1.999942521394814,
+      "mean_retention": 1.246310507956744
+    },
+    {
+      "specification": "Bert",
+      "variant": "bert",
+      "eligible_n": 156580,
+      "positive_share": 0.9999872269766253,
+      "mean_gain": 0.026063188230015234,
+      "impression_weighted_mean": 0.02464779017623917,
+      "median_gain": 0.015114833911259968,
+      "ci_95": [
+        0.025655344053294945,
+        0.026481896786429322
+      ],
+      "std_effect": 1.1612180831111867,
+      "mean_swaps": 1.9999233618597523,
+      "mean_retention": 1.3319644056668802
+    },
+    {
+      "specification": "Novelty K3",
+      "variant": "novelty_k3",
+      "eligible_n": 156580,
+      "positive_share": 0.9999872269766253,
+      "mean_gain": 0.14573653845840986,
+      "impression_weighted_mean": 0.13332211828169394,
+      "median_gain": 0.12742169499397277,
+      "ci_95": [
+        0.1450111417339226,
+        0.14648645310592862
+      ],
+      "std_effect": 3.6224049393176676,
+      "mean_swaps": 1.9999105888363775,
+      "mean_retention": 1.2493971386967022
+    },
+    {
+      "specification": "Novelty K10",
+      "variant": "novelty_k10",
+      "eligible_n": 156580,
+      "positive_share": 0.9999872269766253,
+      "mean_gain": 0.16283498163713456,
+      "impression_weighted_mean": 0.14963173942107674,
+      "median_gain": 0.14299575005258833,
+      "ci_95": [
+        0.16204152236866012,
+        0.16365198125706443
+      ],
+      "std_effect": 3.6713045674058784,
+      "mean_swaps": 1.9999297483714396,
+      "mean_retention": 1.2481069413651726
+    },
+    {
+      "specification": "Common Support 5",
+      "variant": "common_support_5",
+      "eligible_n": 156580,
+      "positive_share": 0.9999552944181888,
+      "mean_gain": 0.15040969740225757,
+      "impression_weighted_mean": 0.13771618852993245,
+      "median_gain": 0.13142703846096992,
+      "ci_95": [
+        0.1496638931762589,
+        0.15117693378008992
+      ],
+      "std_effect": 3.6265821894238317,
+      "mean_swaps": 1.9997892451143187,
+      "mean_retention": 1.2494327432995687
+    },
+    {
+      "specification": "Headroom Retention 99",
+      "variant": "headroom_retention_99",
+      "eligible_n": 156580,
+      "positive_share": 0.9999872269766253,
+      "mean_gain": 0.15187869917621352,
+      "impression_weighted_mean": 0.13914168527311485,
+      "median_gain": 0.13283195429378086,
+      "ci_95": [
+        0.15112768312753472,
+        0.15265895789598705
+      ],
+      "std_effect": 3.637389836319511,
+      "mean_swaps": 1.999897815813003,
+      "mean_retention": 1.2488083407139225
+    },
+    {
+      "specification": "Headroom Retention 95",
+      "variant": "headroom_retention_95",
+      "eligible_n": 156580,
+      "positive_share": 0.9999872269766253,
+      "mean_gain": 0.152100258696461,
+      "impression_weighted_mean": 0.13939102413712348,
+      "median_gain": 0.13317538425326347,
+      "ci_95": [
+        0.15135735764999741,
+        0.15287915728996518
+      ],
+      "std_effect": 3.648734125369994,
+      "mean_swaps": 1.9999489079065014,
+      "mean_retention": 1.2474081651880857
+    }
+  ]
+}

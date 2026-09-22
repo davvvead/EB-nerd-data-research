@@ -1,0 +1,25 @@
+{
+  "variant": "bert",
+  "observed_exposure": {
+    "mean_discovery": 0.008866930195956201,
+    "mean_relevance_coverage": 0.47359975668804005,
+    "mean_conditional_novelty": 0.0191674287784719,
+    "mean_relevance": 0.10069645205552546
+  },
+  "primary_popularity_null": {
+    "mean_discovery": 0.016576347674340748,
+    "mean_relevance_coverage": 0.8615991722471468,
+    "mean_conditional_novelty": 0.01935004830617715
+  },
+  "random_reference_null": {
+    "mean_discovery": 0.012770212809956088
+  },
+  "stage_gap_observed_minus_null": {
+    "discovery_gap": -0.008061380648977393,
+    "ci_95": [
+      -0.008192148956846454,
+      -0.00792439912833371
+    ],
+    "random_null_discovery_gap": -0.0039032826139998858
+  }
+}

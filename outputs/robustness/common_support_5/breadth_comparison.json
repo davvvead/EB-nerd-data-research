@@ -1,0 +1,39 @@
+{
+  "eligible_low_impressions": 25731,
+  "eligible_high_impressions": 87158,
+  "matched_pairs_count": 12243,
+  "low_match_rate": 0.4758073918619564,
+  "high_match_rate": 0.14046903324995985,
+  "unmatched_low_count": 13488,
+  "unmatched_high_count": 74915,
+  "effect_direction": "High breadth minus Low breadth",
+  "discovery_difference": {
+    "point_estimate": 0.006754433789754616,
+    "ci_95": [
+      0.00306991891086978,
+      0.010704556260634953
+    ],
+    "std_error": 0.001901963520067696,
+    "between_user_sd": 0.09168553581436896,
+    "standardized_effect": 0.0736695677214558,
+    "practical_significance": false
+  },
+  "coverage_difference": {
+    "point_estimate": 0.0070743249728825175,
+    "ci_95": [
+      -0.0010429578848794071,
+      0.01581760727844728
+    ],
+    "standardized_effect": 0.03412692335961933
+  },
+  "novelty_difference": {
+    "point_estimate": 0.00840757211519588,
+    "ci_95": [
+      0.004818019422791734,
+      0.012417875812626013
+    ],
+    "standardized_effect": 0.09009323468283979
+  },
+  "variant": "common_support_5",
+  "note": "Matched breadth comparison is frozen identical to primary."
+}

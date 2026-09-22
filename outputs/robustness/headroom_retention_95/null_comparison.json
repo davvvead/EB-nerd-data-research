@@ -1,0 +1,26 @@
+{
+  "observed_slate": {
+    "mean_discovery": 0.15634851401131336,
+    "mean_relevance_coverage": 0.47359975668804005,
+    "mean_conditional_novelty": 0.33724165576432635,
+    "mean_predicted_relevance": 0.10069645205552546
+  },
+  "popularity_recency_weighted_null": {
+    "mean_discovery": 0.3064411923833839,
+    "mean_relevance_coverage": 0.8615991722471468,
+    "mean_conditional_novelty": 0.36274385527140623,
+    "discovery_gap": -0.16830897257365787,
+    "ci_95_discovery_gap": [
+      -0.16952420407063373,
+      -0.16714266792091792
+    ],
+    "coverage_gap": -0.3760709607821487,
+    "conditional_novelty_gap": -0.0318227920520169
+  },
+  "uniform_random_null": {
+    "mean_discovery": 0.22956869398484242,
+    "discovery_gap": -0.07322017997352899
+  },
+  "variant": "headroom_retention_95",
+  "note": "Null slate comparisons are frozen identical to primary."
+}

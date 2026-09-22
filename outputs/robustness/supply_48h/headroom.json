@@ -1,0 +1,18 @@
+{
+  "variant": "supply_48h",
+  "status": "QUALIFIED",
+  "eligible_impressions": 156580,
+  "share_with_positive_headroom": 0.9999872269766253,
+  "mean_headroom_discovery_gain": 0.14050647361850116,
+  "median_headroom_discovery_gain": 0.13440797064039442,
+  "ci_95": [
+    0.15233721216269064,
+    0.15386413856158815
+  ],
+  "std_error": 0.0003816091658050665,
+  "between_user_sd": 0.04177891494950933,
+  "standardized_magnitude": 3.664398175277378,
+  "practical_significance": true,
+  "average_swaps_used": 1.999942521394814,
+  "average_modeled_relevance_retention": 1.246310507956744
+}

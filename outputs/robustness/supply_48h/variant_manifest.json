@@ -1,6 +1,93 @@
 {
   "variant": "supply_48h",
-  "status": "PENDING_EXECUTION",
-  "outcomes_computed": false,
-  "output_directory": "outputs/robustness/supply_48h"
+  "status": "COMPLETED",
+  "outcomes_computed": true,
+  "output_directory": "outputs/robustness/supply_48h",
+  "timestamp_utc": "2026-09-22T04:22:36.765099+00:00",
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "seed": 20260919,
+  "runtime_seconds": 770.0410816250078,
+  "changed_components": [
+    "Observable supply lookback: 48h",
+    "3x supply filter evaluated on target window"
+  ],
+  "frozen_components": [
+    "Production relevance model (relevance_model.joblib)",
+    "Relevance floor tau (0.098570)",
+    "Semantic novelty definition (k=5 contrastive)",
+    "Matching criteria & matched pairs subset",
+    "Headroom constraints (2 swaps, 97% retention, cs >= 3)"
+  ],
+  "generated_files": [
+    {
+      "path": "outputs/robustness/supply_48h/stage_effects.json",
+      "size_bytes": 1874,
+      "sha256": "64606d95760b209152b7a25e72d5550d20cf63d5ca0879f43c301c7391fffa06"
+    },
+    {
+      "path": "outputs/robustness/supply_48h/null_comparison.json",
+      "size_bytes": 719,
+      "sha256": "ffc20cc243169922ded5eb2a05d0655cceec3402a3a333c4a529453f48213aad"
+    },
+    {
+      "path": "outputs/robustness/supply_48h/breadth_comparison.json",
+      "size_bytes": 478,
+      "sha256": "ddc7062e46460d54b56ba74ef12b6d33d5bad0580efa831bb088cc588191902c"
+    },
+    {
+      "path": "outputs/robustness/supply_48h/headroom.json",
+      "size_bytes": 585,
+      "sha256": "08eae81b800b40a1dcdb32141d286d634a52696330ebe04b372636cc989e78d1"
+    },
+    {
+      "path": "outputs/robustness/supply_48h/tidy_impression_outcomes.csv",
+      "size_bytes": 75131810,
+      "sha256": "303080fc9864f40a979185ee7f0048cd9ef68d3af557878c60081a599018aa70"
+    },
+    {
+      "path": "outputs/robustness/supply_48h/tidy_matched_pairs.csv",
+      "size_bytes": 2965624,
+      "sha256": "bb20f45b09a42df73ad26ccddafb5d50cfffcab97a5e1c2c01ffc9255d02a635"
+    },
+    {
+      "path": "outputs/robustness/supply_48h/tidy_user_aggregates.csv",
+      "size_bytes": 1075451,
+      "sha256": "0f31477e488d32698126c2f67bf4ef7f5f7f1bc824e8f96f6aa86dfdb8adf33e"
+    }
+  ],
+  "summary_metrics": {
+    "eligible_impressions": 156580,
+    "eligible_users": 11967,
+    "available_to_exposed_discovery_gap": -0.15849099501027927,
+    "available_to_exposed_ci_95": [
+      -0.15967101231066352,
+      -0.1573450702393123
+    ],
+    "available_to_exposed_std_effect": -2.4197304543193385,
+    "available_coverage_gap": -0.35416033307380523,
+    "available_cond_nov_gap": -0.030933229139665393,
+    "exposed_to_consumed_choice_gap": 0.08551254573364066,
+    "exposed_to_consumed_ci_95": [
+      0.08364552707978143,
+      0.08746741360658508
+    ],
+    "exposed_to_consumed_std_effect": 0.8078118135551071,
+    "choice_cond_nov_gap": -0.00941397703686886,
+    "matched_breadth_difference": 0.006754433789754616,
+    "matched_breadth_ci_95": [
+      0.00306991891086978,
+      0.010704556260634953
+    ],
+    "matched_breadth_std_effect": 0.0736695677214558,
+    "mean_headroom_discovery_gain": 0.15309457970605078,
+    "headroom_median_gain": 0.13440797064039442,
+    "headroom_ci_95": [
+      0.15233721216269064,
+      0.15386413856158815
+    ],
+    "headroom_std_effect": 3.664398175277378,
+    "share_with_positive_headroom": 0.9999872269766253,
+    "average_swaps_used": 1.999942521394814,
+    "average_modeled_relevance_retention": 1.246310507956744
+  }
 }

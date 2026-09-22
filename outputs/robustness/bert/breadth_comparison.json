@@ -1,0 +1,17 @@
+{
+  "variant": "bert",
+  "matched_pairs_analyzed": 12243,
+  "mean_low_discovery": 0.00851120782061587,
+  "mean_high_discovery": 0.008998607217762071,
+  "difference_high_minus_low": {
+    "point_estimate": 0.0006297665464193494,
+    "ci_95": [
+      0.00019975368503890532,
+      0.0010424009612081129
+    ],
+    "std_error": 0.0002174927494762184,
+    "between_user_sd": 0.010507679466278624,
+    "standardized_effect": 0.05993393198188087,
+    "practical_significance": false
+  }
+}

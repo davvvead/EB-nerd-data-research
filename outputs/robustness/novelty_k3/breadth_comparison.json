@@ -1,0 +1,17 @@
+{
+  "variant": "novelty_k3",
+  "matched_pairs_analyzed": 12243,
+  "mean_low_discovery": 0.13903257226083862,
+  "mean_high_discovery": 0.14350571111478788,
+  "difference_high_minus_low": {
+    "point_estimate": 0.005798508102993209,
+    "ci_95": [
+      0.0024883198578412977,
+      0.009290719691155082
+    ],
+    "std_error": 0.0017275390435796583,
+    "between_user_sd": 0.08314660705065686,
+    "standardized_effect": 0.06973836105495541,
+    "practical_significance": false
+  }
+}

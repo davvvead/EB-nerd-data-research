@@ -1,0 +1,17 @@
+{
+  "variant": "supply_48h",
+  "matched_pairs_analyzed": 12243,
+  "mean_low_discovery": 0.15462665291545855,
+  "mean_high_discovery": 0.1598624972903619,
+  "difference_high_minus_low": {
+    "point_estimate": 0.006754433789754616,
+    "ci_95": [
+      0.00306991891086978,
+      0.010704556260634953
+    ],
+    "std_error": 0.001901963520067696,
+    "between_user_sd": 0.09168553581436896,
+    "standardized_effect": 0.0736695677214558,
+    "practical_significance": false
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "variant": "supply_48h",
+  "observed_exposure": {
+    "mean_discovery": 0.15634851401131336,
+    "mean_relevance_coverage": 0.47359975668804005,
+    "mean_conditional_novelty": 0.33724165576432635,
+    "mean_relevance": 0.10069645205552546
+  },
+  "primary_popularity_null": {
+    "mean_discovery": 0.2979371387787357,
+    "mean_relevance_coverage": 0.8399945582904963,
+    "mean_conditional_novelty": 0.3619543670079977
+  },
+  "random_reference_null": {
+    "mean_discovery": 0.13496257894606487
+  },
+  "stage_gap_observed_minus_null": {
+    "discovery_gap": -0.15849099501027927,
+    "ci_95": [
+      -0.15967101231066352,
+      -0.1573450702393123
+    ],
+    "random_null_discovery_gap": 0.02138593506524852
+  }
+}

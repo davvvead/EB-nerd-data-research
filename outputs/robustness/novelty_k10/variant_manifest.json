@@ -1,0 +1,6 @@
+{
+  "variant": "novelty_k10",
+  "status": "PENDING_EXECUTION",
+  "outcomes_computed": false,
+  "output_directory": "outputs/robustness/novelty_k10"
+}

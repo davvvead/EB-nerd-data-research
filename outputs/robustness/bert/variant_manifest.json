@@ -1,0 +1,6 @@
+{
+  "variant": "bert",
+  "status": "PENDING_EXECUTION",
+  "outcomes_computed": false,
+  "output_directory": "outputs/robustness/bert"
+}

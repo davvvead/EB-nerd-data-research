@@ -1,0 +1,6 @@
+{
+  "variant": "supply_48h",
+  "status": "PENDING_EXECUTION",
+  "outcomes_computed": false,
+  "output_directory": "outputs/robustness/supply_48h"
+}

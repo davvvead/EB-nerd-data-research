@@ -1,0 +1,6 @@
+{
+  "variant": "headroom_retention_95",
+  "status": "PENDING_EXECUTION",
+  "outcomes_computed": false,
+  "output_directory": "outputs/robustness/headroom_retention_95"
+}

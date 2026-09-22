@@ -2,6 +2,7 @@
   "protocol_commit_hash": "cb14d50736d1b8c8202b1aa67158e15c3eabb804",
   "preoutcome_gate_commit_hash": "db8d1003358f50d51e66672ca3a6a8e8f02d1c0a",
   "implementation_lock_commit_hash": "083e93104483658b6418900770de7d357665c8e8",
+  "train_implementation_commit_hash": "2e1383454c51e86cd7bb42a144d53a9bc1fd0e88",
   "current_code_commit_hash": "083e93104483658b6418900770de7d357665c8e8",
   "protocol_sha256": "df7ca427f39aee143a9a3aeb8a2ca4d59356dac43a25843995915d0ecac933b1",
   "protocol_notes_sha256": "9ae1ab3b7a593a45665ad5abe31433f0e9331885cdbd493724aafb8a9a16edf6",

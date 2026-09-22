@@ -178,6 +178,9 @@ def precompute_novelty_cache(
     Returns DataFrame with columns: user_id, article_id, novelty_k3, novelty_k5, novelty_k10.
     Optionally saves to cache/validation/user_article_novelty.parquet.
     """
+    if output_path is not None and Path(output_path).exists():
+        return pd.read_parquet(output_path)
+
     records = []
     for uid, cand_set in user_ids_and_candidates.items():
         if uid not in profiles:

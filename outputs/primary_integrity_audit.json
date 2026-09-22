@@ -1,0 +1,308 @@
+{
+  "status": "PRIMARY_STATE_FROZEN_READY_FOR_PRESPECIFIED_ROBUSTNESS",
+  "freeze_timestamp_utc": "2026-09-22T03:44:14.161465+00:00",
+  "git_head": "0e6ba855de6b9ddd6b98556fdc3fee39996a9041",
+  "seed": 20260919,
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "robustness_variants_run": 0,
+  "hashes": {
+    "protocol": {
+      "analysis_protocol_v1.yaml": "df7ca427f39aee143a9a3aeb8a2ca4d59356dac43a25843995915d0ecac933b1",
+      "analysis_protocol_notes.md": "9ae1ab3b7a593a45665ad5abe31433f0e9331885cdbd493724aafb8a9a16edf6",
+      "IMPLEMENTATION_DECISIONS.md": "e699155d673d094969cfd66739521c7e3e8135f5882bc5e4893874454fc1d6af",
+      "implementation_plan.md": "b0428e0bbb2f72020e904e8a2f2dc316477d8f594e542af4d03d5f8ee7985e6f"
+    },
+    "source": {
+      "scripts/03_run_validation_analysis.py": "598a6209e018c896424acbe0c8713557960f0ba9595158e32b6f08f328e9c689",
+      "src/validation.py": "53b7305f2d368ffc8c691b5150435e134f929cfb4d0d1da327a43c2cc3a06a4d",
+      "src/discovery.py": "18cda2e80c9a057bc80236be240732896d1d6fbd977a5736ae713100f563e737",
+      "src/headroom.py": "27bf326e850977b4b950a170c0b94e8be493ebdf77cabbc1c270b0bf0a86f6b1",
+      "src/matching.py": "3d7fd04e10340a02e856d679ae171005446a1532f0ef9fc0f72c277f26c25ece",
+      "src/nulls.py": "b8671cc23358657796fb02438a2935b884892879304f6a1d7c920905658b36eb",
+      "src/bootstrap.py": "3345998176ecc4ed7aaf8cdaec1c8e7d7ce3e4ea8ca7e15fb9471ddc178b3309",
+      "src/config.py": "70bb17eb723c2dcbdb4b9cd3e333c28a8e8a0078cd2d93dec01bd541f5b5846c"
+    },
+    "train": {
+      "cache/train/tau.json": "c51de88b92a92463231f3c2d9bc827d7cca452ab184cc5aac3894154394cda69",
+      "cache/train/train_manifest.json": "5b80baf07e8e558c7c93671c8a51d2ba988e2755c51d26dd489fdbb8b115016b",
+      "cache/train/relevance_model_metadata.json": "eafcabf830a7c98c39ca7a85034a8edbee885c9ff86d30cb8f2248028060454d",
+      "outputs/train_fold_diagnostics.json": "2b5b0b3480b7c8b0f00a12e87fb0b169850164b790c62ea69e6630ddae95d5ee",
+      "outputs/relevance_model_train_metrics.json": "c51de88b92a92463231f3c2d9bc827d7cca452ab184cc5aac3894154394cda69"
+    },
+    "primary_validation": {
+      "outputs/relevance_model_metrics.json": "f3a0641720a12c327031eb02e3df22955c8f89ceae3950c744ed5d6d996c7f09",
+      "outputs/stage_effects.json": "747bcfff3807feaa0e4850a3e808407604315ba46bb99f9c3d5ec5cabd02d8d4",
+      "outputs/null_comparison.json": "72f7cc8481a83f9a2836f3e1e1101457f0fd51fb6b6dab5de7853dea742b2841",
+      "outputs/breadth_comparison.json": "ad008c9622ae2719468b5ae5385f2770d52dedd30ccc9d8e9f543a2dfe8fbe47",
+      "outputs/headroom.json": "4028b45226d102d1b72106c8d63136890235f2a1aa273ac4c7e41569b27af483",
+      "outputs/run_manifest.json": "a7748f865d4dac4f0dcda74d1e3e4242e2f928484b17a94ad8cce01d3c622acd",
+      "outputs/primary_validation_summary.md": "fbe401ff1ecfed5f05846c80ca94424786de35d41575c0212af4d6f53727a366",
+      "outputs/tidy_impression_outcomes.csv": "2a6582f14f36d96b5d4a732e6639478d67f30a28d3db8f8d614a4bba2426d4d0",
+      "outputs/tidy_matched_pairs.csv": "bb20f45b09a42df73ad26ccddafb5d50cfffcab97a5e1c2c01ffc9255d02a635",
+      "outputs/tidy_user_aggregates.csv": "618ee8b15fbd680eb793fb8153fb574962c6151986a752086a33d22cd66d6b7f",
+      "cache/validation/user_article_novelty.parquet": "f385b64919410c596c12aafc9b10c825fbe8af5f3654a479da2f7341ae3239de"
+    }
+  },
+  "code_correctness_fixes": [
+    {
+      "issue": "NumPy batch popularity array indexing",
+      "location": "compute_batch_click_popularity call in validation analysis",
+      "root_cause": "Function returned 1D numpy array aligned with candidate order rather than a dictionary mapped by article_id",
+      "fix": "Correctly mapped numpy popularity values to candidate article_id keys",
+      "methodological_impact": "None. Pure runtime error fix."
+    },
+    {
+      "issue": "History length bin column naming alias",
+      "location": "Deterministic matching feature frame preparation",
+      "root_cause": "Feature frame generated history_bin while matching stratum construction referenced history_length_bin",
+      "fix": "Aligned column naming to history_length_bin",
+      "methodological_impact": "None. Pure column alias fix."
+    }
+  ],
+  "train_metadata": {
+    "oof_brier": 0.08762540638565626,
+    "train_relevance_examples": 1457625,
+    "train_positive_count": 151064,
+    "train_positive_rate": 0.1036370808678501,
+    "frozen_tau": 0.09857010114178541,
+    "tau_derivation_rule": "20th percentile of out-of-fold predicted relevance among clicked items in train blocks B2..B5",
+    "oof_auc": 0.7273858201321965,
+    "oof_ndcg": 0.6545707539228096,
+    "train_baseline_ndcg": 0.6298901749920405,
+    "train_ndcg_lift": 0.024680578930769137,
+    "reporting_correction_note": "Clarified that train positive rate is 0.103637 (151,064 / 1,457,625) and tau is 0.098570, rectifying an informal reporting draft that accidentally confused tau with the train positive rate and misstated OOF Brier (0.0876 vs 0.0882)."
+  },
+  "matching_specification": {
+    "matcher_algorithm": "Deterministic 1:1 nearest-neighbor matching without replacement",
+    "caliper": "abs(slate_size_low - slate_size_high) <= 1",
+    "exact_matching_dimensions": [
+      "1. time_bucket_30m (30-minute timestamp bucket)",
+      "2. device_type (raw device type integer code)",
+      "3. is_subscriber (subscriber status boolean)",
+      "4. session_stage (ordinal position of impression in session)",
+      "5. session_length_bin (exact: 1, 2, 3-5, 6+)",
+      "6. history_length_bin (train-derived pre-period history length quartiles: 15-49, 50-111, 112-244, 245+)"
+    ],
+    "tie_breaking_order": [
+      "1. Ascending order of low impression_time",
+      "2. Ascending order of low impression_id",
+      "3. Candidate high impression with smallest abs(slate_size difference)",
+      "4. Candidate high impression with smallest abs(impression_time difference)",
+      "5. Candidate high impression with smallest impression_id"
+    ],
+    "eligible_low_impressions": 25731,
+    "eligible_high_impressions": 87158,
+    "matched_pairs": 12243,
+    "low_match_rate": 0.4758073918620341,
+    "high_match_rate": 0.1404690332500746
+  },
+  "high_user_reuse_and_inference": {
+    "total_matched_pairs": 12243,
+    "unique_low_users": 2401,
+    "unique_high_users": 3821,
+    "low_user_pairs": {
+      "mean": 5.099125364431487,
+      "median": 3.0,
+      "p95": 18.0,
+      "max": 80
+    },
+    "high_user_pairs": {
+      "mean": 3.204135043182413,
+      "median": 2.0,
+      "p95": 9.0,
+      "max": 23
+    },
+    "high_users_in_gt_1_pair": {
+      "count": 2599,
+      "share": 0.680188432347553
+    },
+    "high_users_in_gt_5_pairs": {
+      "count": 594,
+      "share": 0.1554566867312222
+    },
+    "max_high_user_reuse": 23,
+    "high_users_with_multiple_low_users": {
+      "count": 2509,
+      "share": 0.6566343889034284,
+      "max_distinct_low_users": 21
+    },
+    "primary_inference_clustering_rule": "One-way user-clustered bootstrap on low_user_id (2,000 replicates), treating Low users as focal units.",
+    "clustering_limitation_statement": "Repeated High controls can induce dependence across Low-user clusters that this one-way bootstrap does not explicitly model.",
+    "planned_non_primary_sensitivity_flag": "PLANNED_POST_ROBUSTNESS_TWO_WAY_CLUSTERING_SENSITIVITY",
+    "planned_sensitivity_description": "A diagnostic two-way/multi-way clustered or bipartite connected-component bootstrap will be scheduled AFTER the prespecified robustness battery and explicitly labeled as a sensitivity diagnostic, preserving the primary frozen inference."
+  },
+  "age_diagnostic_and_supply_limitation": {
+    "exposed_slates_age_hours": {
+      "min": 0.0,
+      "p25": 1.6,
+      "median": 4.01,
+      "mean": 1565.15,
+      "p75": 10.66,
+      "p99": 10724.81,
+      "max": 10816.52,
+      "share_older_than_24h": 0.2628
+    },
+    "null_slates_age_hours": {
+      "min": 0.0,
+      "p25": 5.61,
+      "median": 11.23,
+      "mean": 11.68,
+      "p75": 17.51,
+      "p99": 23.76,
+      "max": 24.0,
+      "share_older_than_24h": 0.0
+    },
+    "wording_constraint": "All primary Available -> Exposed findings must be phrased relative to the 24-hour observable published supply (or recently published observable supply). Never claim relative to everything available to the publisher or imply knowledge of internal publisher candidate pools."
+  },
+  "consumed_set_verification": {
+    "total_eligible_consumed_items": 149222,
+    "distinct_impressions": 148211,
+    "distinct_users": 11885,
+    "predicted_relevance_distribution": {
+      "min": 0.002549,
+      "p01": 0.025133,
+      "p05": 0.06034,
+      "p20": 0.103409,
+      "median": 0.151199,
+      "mean": 0.160914
+    },
+    "relevance_floor_tau": 0.09857010114178541,
+    "items_ge_tau": {
+      "count": 122969,
+      "share": 0.824067
+    },
+    "items_lt_tau": {
+      "count": 26253,
+      "share": 0.175933
+    },
+    "mean_per_impression_consumed_coverage": {
+      "impression_weighted": 0.825129,
+      "user_macro": 0.685764
+    },
+    "filtering_check": "Confirmed below-tau items were NOT filtered from consumed_ids. All clicked items are retained; below-tau items receive indicator 0 in discovery calculation."
+  },
+  "headroom_invariant_verification": {
+    "total_impressions_evaluated": 156580,
+    "invariant_violations": 0,
+    "swaps_counts": {
+      "0": 2,
+      "1": 9,
+      "2": 156569
+    },
+    "relevance_retention": {
+      "min": 0.97,
+      "p01": 0.9785,
+      "p05": 1.0301,
+      "median": 1.1765,
+      "mean": 1.2481,
+      "p95": 1.6431,
+      "max": 30.1792
+    },
+    "bound_proof": {
+      "min_cosine_similarity": -0.074815,
+      "max_novelty": 1.074815,
+      "gain_exceeding_2_over_S_explanation": "Contrastive semantic novelty 1 - cos exceeds 1.0 when cosine is negative (down to -0.0748). Generalized bound gain <= swaps * max(d) / S verified across all 156,580 impressions with 0 violations.",
+      "violations_of_generalized_bound": 0
+    },
+    "brute_force_optimizer_verification": {
+      "random_sample_size": 100,
+      "max_discrepancy_vs_exhaustive_search": 5.551115123125783e-17
+    }
+  },
+  "estimand_reconciliation": {
+    "primary_inferential_estimand": "User-Level Macro Mean Difference (F = D - E)",
+    "bootstrap_unit": "User (user_id)",
+    "bootstrap_replicates": 2000,
+    "available_to_exposed": {
+      "discovery": {
+        "imp_observed_A": 0.156349,
+        "imp_comparison_B": 0.306441,
+        "imp_diff_C": -0.150093,
+        "user_observed_D": 0.164633,
+        "user_comparison_E": 0.332942,
+        "user_macro_diff_F": -0.168309,
+        "ci_95": [
+          -0.169524,
+          -0.167098
+        ],
+        "std_effect": -2.51
+      },
+      "coverage": {
+        "imp_observed_A": 0.4736,
+        "imp_comparison_B": 0.861599,
+        "imp_diff_C": -0.387999,
+        "user_observed_D": 0.440427,
+        "user_comparison_E": 0.816498,
+        "user_macro_diff_F": -0.376071,
+        "ci_95": [
+          -0.378521,
+          -0.373516
+        ],
+        "std_effect": -2.73
+      },
+      "novelty": {
+        "imp_observed_A": 0.337242,
+        "imp_comparison_B": 0.361253,
+        "imp_diff_C": -0.024011,
+        "user_observed_D": 0.383848,
+        "user_comparison_E": 0.415671,
+        "user_macro_diff_F": -0.031823,
+        "ci_95": [
+          -0.032585,
+          -0.031086
+        ],
+        "std_effect": -0.72
+      }
+    },
+    "exposed_to_consumed": {
+      "discovery": {
+        "imp_observed_A": 0.198473,
+        "imp_comparison_B": 0.267771,
+        "imp_diff_C": 0.069298,
+        "user_observed_D": 0.200828,
+        "user_comparison_E": 0.28634,
+        "user_macro_diff_F": 0.085513,
+        "ci_95": [
+          0.083569,
+          0.087498
+        ],
+        "std_effect": 0.81
+      },
+      "coverage": {
+        "imp_observed_A": 0.476885,
+        "imp_comparison_B": 0.705697,
+        "imp_diff_C": 0.228812,
+        "user_observed_D": 0.443361,
+        "user_comparison_E": 0.685764,
+        "user_macro_diff_F": 0.242403,
+        "ci_95": [
+          0.238647,
+          0.246197
+        ],
+        "std_effect": 1.16
+      },
+      "novelty": {
+        "imp_observed_A": 0.336977,
+        "imp_comparison_B": 0.275831,
+        "imp_diff_C": -0.009701,
+        "user_observed_D": 0.383152,
+        "user_comparison_E": 0.2998,
+        "user_macro_diff_F": -0.009414,
+        "ci_95": [
+          -0.010416,
+          -0.008436
+        ],
+        "std_effect": -0.16
+      }
+    },
+    "headroom_discovery_gain": {
+      "imp_mean": 0.139279,
+      "user_macro_mean": 0.152011,
+      "ci_95": [
+        0.151249,
+        0.152774
+      ],
+      "std_effect": 3.64
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "validation_roc_auc": 0.7317407549067165,
+  "validation_ndcg": 0.6526495657177016,
+  "validation_baseline_ndcg": 0.635165239758605,
+  "validation_ndcg_lift": 0.017484325959096658,
+  "validation_brier_score": 0.08523520462470247,
+  "frozen_tau": 0.09857010114178541,
+  "qualification_thresholds": {
+    "min_auc": 0.6,
+    "min_lift": 0.01
+  },
+  "is_qualified": true,
+  "qualification_status": "QUALIFIED",
+  "total_scored_examples": 1559134,
+  "positive_examples": 157222,
+  "positive_rate": 0.10083931207965448,
+  "causal_interpretation_warning": "Model coefficients reflect statistical associations within exposed slates and must not be interpreted causally."
+}

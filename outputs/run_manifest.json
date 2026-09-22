@@ -1,0 +1,93 @@
+{
+  "status": "PRIMARY_VALIDATION_RUN_COMPLETE",
+  "split": "validation",
+  "timestamp_utc": "2026-09-22T03:26:45.054027+00:00",
+  "protocol_commit_hash": "cb14d50736d1b8c8202b1aa67158e15c3eabb804",
+  "preoutcome_gate_commit_hash": "db8d1003358f50d51e66672ca3a6a8e8f02d1c0a",
+  "implementation_lock_commit_hash": "083e93104483658b6418900770de7d357665c8e8",
+  "train_implementation_commit_hash": "2e1383454c51e86cd7bb42a144d53a9bc1fd0e88",
+  "validation_implementation_commit_hash": "38c7e886c71743c17649591142bac31573a1903b",
+  "pre_validation_qa_commit_hash": "0e6ba855de6b9ddd6b98556fdc3fee39996a9041",
+  "seed": 20260919,
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "sample_accounting": {
+    "total_validation_behavior_rows": 244647,
+    "total_frontpage_impressions": 173345,
+    "eligible_slate_size_impressions": 161750,
+    "eligible_users_with_history_ge_15": 13564,
+    "eligible_impressions_pre_supply": 156580,
+    "primary_counterfactual_eligible_impressions": 156580,
+    "distinct_users_in_primary_analysis": 11967,
+    "choice_stage_eligible_impressions": 148211,
+    "breadth_counts": {
+      "high": 87158,
+      "medium": 43691,
+      "low": 25731
+    },
+    "exclusion_counts_by_reason": {
+      "non_frontpage_context": 71302,
+      "slate_size_out_of_bounds": 11595,
+      "user_history_lt_15": 5170,
+      "insufficient_observable_supply_lt_3x": 0,
+      "no_eligible_consumed_item_in_choice": 8369
+    }
+  },
+  "relevance_model_qualification": {
+    "validation_auc": 0.7317407549067165,
+    "validation_ndcg": 0.6526495657177016,
+    "baseline_ndcg": 0.635165239758605,
+    "ndcg_lift": 0.017484325959096658,
+    "is_qualified": true,
+    "status": "QUALIFIED"
+  },
+  "execution_runtime_seconds": {
+    "total_pipeline": 462.7675346670003
+  },
+  "generated_files": [
+    {
+      "path": "outputs/relevance_model_metrics.json",
+      "size_bytes": 668,
+      "sha256": "f3a0641720a12c327031eb02e3df22955c8f89ceae3950c744ed5d6d996c7f09"
+    },
+    {
+      "path": "outputs/stage_effects.json",
+      "size_bytes": 1837,
+      "sha256": "747bcfff3807feaa0e4850a3e808407604315ba46bb99f9c3d5ec5cabd02d8d4"
+    },
+    {
+      "path": "outputs/null_comparison.json",
+      "size_bytes": 763,
+      "sha256": "72f7cc8481a83f9a2836f3e1e1101457f0fd51fb6b6dab5de7853dea742b2841"
+    },
+    {
+      "path": "outputs/breadth_comparison.json",
+      "size_bytes": 1031,
+      "sha256": "ad008c9622ae2719468b5ae5385f2770d52dedd30ccc9d8e9f543a2dfe8fbe47"
+    },
+    {
+      "path": "outputs/headroom.json",
+      "size_bytes": 967,
+      "sha256": "4028b45226d102d1b72106c8d63136890235f2a1aa273ac4c7e41569b27af483"
+    },
+    {
+      "path": "outputs/tidy_impression_outcomes.csv",
+      "size_bytes": 75139360,
+      "sha256": "2a6582f14f36d96b5d4a732e6639478d67f30a28d3db8f8d614a4bba2426d4d0"
+    },
+    {
+      "path": "outputs/tidy_matched_pairs.csv",
+      "size_bytes": 2965624,
+      "sha256": "bb20f45b09a42df73ad26ccddafb5d50cfffcab97a5e1c2c01ffc9255d02a635"
+    },
+    {
+      "path": "outputs/tidy_user_aggregates.csv",
+      "size_bytes": 1075211,
+      "sha256": "618ee8b15fbd680eb793fb8153fb574962c6151986a752086a33d22cd66d6b7f"
+    },
+    {
+      "path": "cache/validation/user_article_novelty.parquet",
+      "size_bytes": 115559357,
+      "sha256": "f385b64919410c596c12aafc9b10c825fbe8af5f3654a479da2f7341ae3239de"
+    }
+  ]
+}

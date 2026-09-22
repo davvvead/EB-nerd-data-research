@@ -30,12 +30,97 @@ from src.config import (
     MIN_QUALIFICATION_NDCG_LIFT,
     CACHE_TRAIN_DIR,
     CACHE_VAL_DIR,
+    VALIDATION_HISTORY_PATH,
+    TRAIN_HISTORY_PATH,
 )
 from src.data import norm_list, epoch_ns, load_history, load_articles
 from src.embeddings import EmbeddingStore
 from src.popularity import ClickPopularityIndex
 from src.profiles import UserProfile, build_user_profiles
 from src.relevance import RelevancePipeline, compute_mean_ndcg
+
+VALIDATION_BEHAVIOR_START_TIME = pd.Timestamp("2023-05-25T07:00:00Z")
+
+
+def validate_history_source(
+    history_path: Path | str,
+    behavior_start: pd.Timestamp = VALIDATION_BEHAVIOR_START_TIME,
+) -> Dict[str, Any]:
+    """
+    Fail-fast runtime assertion verifying:
+    1. The validation profile source path resolves strictly to ebnerd_small/validation/history.parquet.
+    2. Its latest history timestamp strictly precedes held-out validation behavior start.
+    3. Its history span is approximately 21 days (between 20.5 and 21.5 days).
+    Raises ValueError, AssertionError, or FileNotFoundError if invalid.
+    """
+    p = Path(history_path).resolve()
+    expected = Path(VALIDATION_HISTORY_PATH).resolve()
+    train_path = Path(TRAIN_HISTORY_PATH).resolve()
+
+    if p == train_path:
+        raise ValueError(
+            f"REJECTED: History path '{p}' is TRAIN history. "
+            f"Validation user profiles must be derived strictly from '{expected}'."
+        )
+
+    if p != expected:
+        raise ValueError(
+            f"Invalid validation history source path: '{p}'. "
+            f"Expected exact path: '{expected}'."
+        )
+
+    if not p.exists():
+        raise FileNotFoundError(f"Validation history file not found: {p}")
+
+    df = pd.read_parquet(p)
+    if "impression_time_fixed" not in df.columns:
+        raise KeyError(f"History table missing 'impression_time_fixed': {p}")
+
+    # Collect timestamp values from nested lists
+    times = []
+    for row in df["impression_time_fixed"]:
+        if row is not None and len(row) > 0:
+            times.extend(row)
+
+    if not times:
+        raise ValueError(f"No timestamps found in history table: {p}")
+
+    times_s = pd.to_datetime(times, utc=True)
+    min_t = times_s.min()
+    max_t = times_s.max()
+
+    # Assertion 1: Latest timestamp strictly precedes validation behavior start
+    if max_t >= behavior_start:
+        raise AssertionError(
+            f"Validation history latest timestamp ({max_t}) must strictly precede "
+            f"validation behavior start ({behavior_start})."
+        )
+
+    # Assertion 2: Latest timestamp is adjacent to validation behavior start (gap <= 24h)
+    gap_hours = (behavior_start - max_t).total_seconds() / 3600.0
+    if gap_hours > 24.0:
+        raise AssertionError(
+            f"Validation history latest timestamp ({max_t}) is {gap_hours:.1f}h before "
+            f"behavior start ({behavior_start}), indicating an obsolete or non-adjacent history file."
+        )
+
+    # Assertion 3: History span is approximately 21 days
+    span_days = (max_t - min_t).total_seconds() / (24 * 3600.0)
+    if not (20.5 <= span_days <= 21.5):
+        raise AssertionError(
+            f"Validation history span ({span_days:.2f} days) is not approximately 21 days."
+        )
+
+    return {
+        "path": str(p),
+        "min_time": str(min_t),
+        "max_time": str(max_t),
+        "span_days": float(span_days),
+        "gap_seconds": float((behavior_start - max_t).total_seconds()),
+        "distinct_users": int(df["user_id"].nunique()),
+        "row_count": len(df),
+        "verified": True,
+    }
 
 
 def build_validation_user_profiles(
@@ -49,6 +134,21 @@ def build_validation_user_profiles(
     Does NOT use validation behavior clicks.
     """
     return build_user_profiles(history_df, articles_df, min_history_len=min_history_len)
+
+
+def load_validation_user_profiles(
+    history_path: Path | str = VALIDATION_HISTORY_PATH,
+    articles_df: Optional[pd.DataFrame] = None,
+    min_history_len: int = MINIMUM_HISTORY_LENGTH,
+) -> Dict[Any, UserProfile]:
+    """
+    Load validation user profiles with fail-fast source path verification.
+    """
+    validate_history_source(history_path)
+    hist_df = load_history(history_path)
+    if articles_df is None:
+        articles_df = load_articles()
+    return build_validation_user_profiles(hist_df, articles_df, min_history_len=min_history_len)
 
 
 def build_unified_time_safe_popularity_index(

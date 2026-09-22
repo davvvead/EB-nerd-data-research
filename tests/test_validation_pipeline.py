@@ -17,16 +17,42 @@ from src.config import (
     ROOT_DIR,
     BREADTH_TERTILE_LOW_TO_MED,
     BREADTH_TERTILE_MED_TO_HIGH,
+    VALIDATION_HISTORY_PATH,
+    TRAIN_HISTORY_PATH,
 )
 from src.data import epoch_ns
 from src.popularity import ClickPopularityIndex
 from src.validation import (
     build_validation_user_profiles,
     evaluate_relevance_qualification,
+    validate_history_source,
+    load_validation_user_profiles,
 )
 
 
 class TestValidationPipeline(unittest.TestCase):
+    def test_validation_profile_source_guard(self):
+        """The validation profile loader must strictly enforce validation history and reject train history."""
+        # 1. Real validation history source must pass validation checks
+        val_info = validate_history_source(VALIDATION_HISTORY_PATH)
+        self.assertTrue(val_info["verified"])
+        self.assertEqual(val_info["distinct_users"], 15342)
+        self.assertAlmostEqual(val_info["span_days"], 21.0, delta=0.1)
+        self.assertIn("2023-05-04", val_info["min_time"])
+        self.assertIn("2023-05-25", val_info["max_time"])
+
+        # 2. Substituting TRAIN history must fail with ValueError
+        with self.assertRaises(ValueError) as ctx:
+            validate_history_source(TRAIN_HISTORY_PATH)
+        self.assertIn("TRAIN history", str(ctx.exception))
+
+        with self.assertRaises(ValueError) as ctx:
+            load_validation_user_profiles(history_path=TRAIN_HISTORY_PATH)
+        self.assertIn("TRAIN history", str(ctx.exception))
+
+        # 3. Arbitrary path must fail with ValueError
+        with self.assertRaises(ValueError):
+            validate_history_source("some/other/path/history.parquet")
     def test_validation_profiling_uses_frozen_train_cutoffs(self):
         """Validation profiles must use frozen train tertile cutoffs, not recalculate."""
         # 3 synthetic users with histories giving specific entropies

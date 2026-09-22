@@ -1,0 +1,124 @@
+{
+  "readiness_status": "READY FOR ONE-TIME HELD-OUT VALIDATION RUN",
+  "held_out_validation_outcomes_status": "UNOPENED",
+  "validation_history_verification": {
+    "classification": "CASE A: Documentation typo in previous report; code path correctly targets validation history",
+    "validation_history_path": "ebnerd_small/validation/history.parquet",
+    "train_history_path": "ebnerd_small/train/history.parquet",
+    "train_history_range": [
+      "2023-04-27T07:00:00+00:00",
+      "2023-05-18T06:59:59+00:00"
+    ],
+    "validation_history_range": [
+      "2023-05-04T07:00:00+00:00",
+      "2023-05-25T06:59:59+00:00"
+    ],
+    "validation_history_distinct_users": 15342,
+    "validation_history_span_days": 20.999988425925928,
+    "validation_behavior_start": "2023-05-25T07:00:02+00:00",
+    "gap_before_behavior_seconds": 3.0,
+    "fail_fast_assertion_active": true
+  },
+  "provenance_commit_hashes": {
+    "protocol_commit_hash": "cb14d50736d1b8c8202b1aa67158e15c3eabb804",
+    "preoutcome_gate_commit_hash": "db8d1003358f50d51e66672ca3a6a8e8f02d1c0a",
+    "implementation_lock_commit_hash": "083e93104483658b6418900770de7d357665c8e8",
+    "train_implementation_commit_hash": "2e1383454c51e86cd7bb42a144d53a9bc1fd0e88",
+    "train_provenance_record_commit_hash": "d757597d48f415ca3f49d98c4501259b9e335135",
+    "validation_implementation_commit_hash": "38c7e886c71743c17649591142bac31573a1903b"
+  },
+  "authoritative_files_sha256": {
+    "analysis_protocol_v1.yaml": "df7ca427f39aee143a9a3aeb8a2ca4d59356dac43a25843995915d0ecac933b1",
+    "analysis_protocol_notes.md": "9ae1ab3b7a593a45665ad5abe31433f0e9331885cdbd493724aafb8a9a16edf6",
+    "IMPLEMENTATION_DECISIONS.md": "e699155d673d094969cfd66739521c7e3e8135f5882bc5e4893874454fc1d6af",
+    "implementation_plan.md": "b0428e0bbb2f72020e904e8a2f2dc316477d8f594e542af4d03d5f8ee7985e6f"
+  },
+  "frozen_parameters": {
+    "seed": 20260919,
+    "frozen_tau": 0.09857010114178541,
+    "primary_supply_window_hours": 24,
+    "sensitivity_supply_windows_hours": [12, 48],
+    "supply_ratio_requirement": 3.0,
+    "eligible_slate_size_range": [5, 26],
+    "minimum_history_length": 15,
+    "primary_semantic_representation": "contrastive_vector.parquet",
+    "history_similarity_k": 5,
+    "breadth_cutoffs": [1.4638116962471364, 1.5905145971043473],
+    "history_length_bins": [
+      [15, 49],
+      [50, 111],
+      [112, 244],
+      [245, "inf"]
+    ],
+    "common_support_primary_n": 3,
+    "common_support_sensitivity_n": 5,
+    "null_draws_per_impression": 200,
+    "bootstrap_replicates": 2000,
+    "headroom_max_swaps": 2,
+    "headroom_primary_relevance_retention": 0.97,
+    "headroom_sensitivity_relevance_retentions": [0.99, 0.95]
+  },
+  "environment": {
+    "python": "3.13.5",
+    "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.5.2",
+    "joblib": "1.6.0"
+  },
+  "test_suite": {
+    "total_test_files": 12,
+    "total_tests": 38,
+    "passed_tests": 38,
+    "failed_tests": 0,
+    "runtime_seconds": 2.85,
+    "status": "PASS"
+  },
+  "dry_run": {
+    "status": "SUCCESS",
+    "runtime_seconds": 0.18,
+    "validation_data_touched": false,
+    "all_stages_exercised": true
+  },
+  "held_out_authorization_guard": {
+    "status": "ACTIVE",
+    "flag_required": "--authorize-heldout-run",
+    "verified_unauthorized_exit_code": 1,
+    "verified_abort_message": "ABORT: REAL HELD-OUT VALIDATION DATA IS LOCKED."
+  },
+  "real_outcome_artifact_scan": {
+    "cache_validation_dir_empty": true,
+    "outputs_run_manifest_exists": false,
+    "outputs_relevance_metrics_exists": false,
+    "outputs_stage_effects_exists": false,
+    "outputs_null_comparison_exists": false,
+    "outputs_breadth_comparison_exists": false,
+    "outputs_headroom_exists": false,
+    "unexpected_outcomes_found": false
+  },
+  "model_immutability": {
+    "frozen_model_file": "cache/train/relevance_model.joblib",
+    "frozen_tau_file": "cache/train/tau.json",
+    "refitting_on_validation": false,
+    "rescaling_on_validation": false,
+    "recalculating_cutpoints": false,
+    "unseen_device_handling": "ignore (mapped to all-zero one-hot)"
+  },
+  "leakage_checks": {
+    "validation_history_used_exclusively_for_profiles": true,
+    "validation_behaviors_profile_leakage": false,
+    "same_time_clicks_excluded": true,
+    "future_clicks_excluded": true,
+    "publication_boundary_strictly_precedes_impression": true,
+    "counterfactual_supply_filter_confined_to_downstream": true
+  },
+  "sampler_definition": {
+    "method": "Gumbel-top-k exponential key sampling",
+    "theoretical_equivalence": "Efraimidis & Spirakis (2006) weighted sampling without replacement",
+    "weight_formula": "(1 + clicks_24h) * 2^(-age_hours / 12)",
+    "key_formula": "log(max(w, 1e-12)) - log(max(E, 1e-12)) where E ~ Exp(1.0)",
+    "draws_per_impression": 200,
+    "zero_weight_handling": "clipped to 1e-12 floor",
+    "seed_strategy": "SEED + impression_id"
+  }
+}

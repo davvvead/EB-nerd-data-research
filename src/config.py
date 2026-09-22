@@ -79,6 +79,10 @@ CACHE_VAL_DIR = CACHE_DIR / "validation"
 CACHE_EMB_DIR = CACHE_DIR / "embeddings"
 OUTPUTS_DIR = ROOT_DIR / "outputs"
 
+TRAIN_HISTORY_PATH = ROOT_DIR / "ebnerd_small" / "train" / "history.parquet"
+VALIDATION_HISTORY_PATH = ROOT_DIR / "ebnerd_small" / "validation" / "history.parquet"
+VALIDATION_BEHAVIORS_PATH = ROOT_DIR / "ebnerd_small" / "validation" / "behaviors.parquet"
+
 
 def ensure_directories() -> None:
     """Ensure all required cache and output directories exist."""

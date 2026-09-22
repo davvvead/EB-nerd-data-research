@@ -43,6 +43,7 @@ from src.config import (
     CACHE_TRAIN_DIR,
     CACHE_VAL_DIR,
     OUTPUTS_DIR,
+    VALIDATION_HISTORY_PATH,
     ensure_directories,
 )
 from src.data import epoch_ns
@@ -59,6 +60,7 @@ from src.bootstrap import user_clustered_bootstrap, bootstrap_matched_pairs
 from src.validation import (
     build_validation_user_profiles,
     evaluate_relevance_qualification,
+    validate_history_source,
 )
 from src.reporting import export_json_artifact, export_tidy_csv
 
@@ -318,6 +320,9 @@ def main():
 
     # Real execution placeholder (when authorized)
     print("Beginning authorized validation outcome analysis...")
+    print("[0/8] Verifying validation pre-period history source...")
+    hist_info = validate_history_source(VALIDATION_HISTORY_PATH)
+    print(f"  -> Pre-period validation history verified: {hist_info['distinct_users']:,} users across {hist_info['span_days']:.1f} days ({hist_info['min_time']} to {hist_info['max_time']})")
 
 
 if __name__ == "__main__":

@@ -19,3 +19,17 @@ bundle_report.json
 # Embedding artifacts (if downloaded locally)
 bert_base_multilingual_cased.parquet
 contrastive_vector.parquet
+
+# Reproducible generated analysis caches
+cache/train/*.parquet
+cache/train/*.npz
+cache/train/*.joblib
+cache/embeddings/*.npy
+
+# Keep lightweight train metadata under version control
+!cache/train/train_manifest.json
+!cache/train/relevance_model_metadata.json
+!cache/train/tau.json
+
+# Python test cache
+.pytest_cache/

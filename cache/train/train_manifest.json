@@ -1,0 +1,212 @@
+{
+  "protocol_commit_hash": "cb14d50736d1b8c8202b1aa67158e15c3eabb804",
+  "preoutcome_gate_commit_hash": "db8d1003358f50d51e66672ca3a6a8e8f02d1c0a",
+  "implementation_lock_commit_hash": "083e93104483658b6418900770de7d357665c8e8",
+  "current_code_commit_hash": "083e93104483658b6418900770de7d357665c8e8",
+  "protocol_sha256": "df7ca427f39aee143a9a3aeb8a2ca4d59356dac43a25843995915d0ecac933b1",
+  "protocol_notes_sha256": "9ae1ab3b7a593a45665ad5abe31433f0e9331885cdbd493724aafb8a9a16edf6",
+  "implementation_decisions_sha256": "e699155d673d094969cfd66739521c7e3e8135f5882bc5e4893874454fc1d6af",
+  "implementation_plan_sha256": "b0428e0bbb2f72020e904e8a2f2dc316477d8f594e542af4d03d5f8ee7985e6f",
+  "seed": 20260919,
+  "protocol_version": "phase1-parameter-freeze-v1",
+  "environment": {
+    "python": "3.13.5 (v3.13.5:6cb20a219a8, Jun 11 2025, 12:23:45) [Clang 16.0.0 (clang-1600.0.26.6)]",
+    "platform": "macOS-15.7.9-arm64-arm-64bit-Mach-O",
+    "numpy": "2.1.3",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.5.2",
+    "joblib": "1.6.0"
+  },
+  "train_data": {
+    "relevance_training_eligibility_rule": "article_id is null, observed slate size 5 through 26 inclusive, user pre-period history length >= 15 (observable_supply >= 3x is reserved for counterfactual analyses and was NOT applied to relevance training)",
+    "train_behavior_date_range": [
+      "2023-05-18T07:00:01+00:00",
+      "2023-05-25T06:59:58+00:00"
+    ],
+    "train_history_date_range": [
+      "2023-04-27T07:00:00+00:00",
+      "2023-05-18T06:59:59+00:00"
+    ],
+    "total_train_frontpage_impressions": 162466,
+    "eligible_train_frontpage_impressions": 150492,
+    "eligible_train_users": 13596,
+    "relevance_example_count": 1457625,
+    "positive_count": 151064,
+    "negative_count": 1306561,
+    "positive_rate": 0.1036370808678501
+  },
+  "oof_forward_chaining": {
+    "blocks": [
+      {
+        "block": "B1",
+        "start_timestamp": "2023-05-18 07:00:01+00:00",
+        "end_timestamp": "2023-05-19 12:10:58+00:00",
+        "impressions": 30098,
+        "examples": 295152,
+        "positives": 30223,
+        "positive_rate": 0.10239808640971432
+      },
+      {
+        "block": "B2",
+        "start_timestamp": "2023-05-19 12:10:59+00:00",
+        "end_timestamp": "2023-05-20 21:48:54+00:00",
+        "impressions": 30098,
+        "examples": 293455,
+        "positives": 30226,
+        "positive_rate": 0.10300046003646215,
+        "auc": 0.733542751893016,
+        "ndcg": 0.6586956760067221,
+        "baseline_ndcg": 0.645247239925432,
+        "ndcg_lift_over_baseline": 0.013448436081290094,
+        "brier": 0.08674204875244251
+      },
+      {
+        "block": "B3",
+        "start_timestamp": "2023-05-20 21:48:58+00:00",
+        "end_timestamp": "2023-05-22 09:58:41+00:00",
+        "impressions": 30098,
+        "examples": 291580,
+        "positives": 30196,
+        "positive_rate": 0.10355991494615543,
+        "auc": 0.7277130445878448,
+        "ndcg": 0.6592363277706351,
+        "baseline_ndcg": 0.6179913370954319,
+        "ndcg_lift_over_baseline": 0.041244990675203264,
+        "brier": 0.08711539472953962
+      },
+      {
+        "block": "B4",
+        "start_timestamp": "2023-05-22 09:58:44+00:00",
+        "end_timestamp": "2023-05-23 17:53:45+00:00",
+        "impressions": 30098,
+        "examples": 287616,
+        "positives": 30225,
+        "positive_rate": 0.10508803404539385,
+        "auc": 0.7258543460987038,
+        "ndcg": 0.6527782026590417,
+        "baseline_ndcg": 0.6293912322706081,
+        "ndcg_lift_over_baseline": 0.023386970388433626,
+        "brier": 0.08856729854368946
+      },
+      {
+        "block": "B5",
+        "start_timestamp": "2023-05-23 17:53:52+00:00",
+        "end_timestamp": "2023-05-25 06:59:58+00:00",
+        "impressions": 30100,
+        "examples": 289822,
+        "positives": 30194,
+        "positive_rate": 0.10418118707344508,
+        "auc": 0.7240748652982008,
+        "ndcg": 0.6475732742345509,
+        "baseline_ndcg": 0.6269310873068767,
+        "ndcg_lift_over_baseline": 0.020642186927674167,
+        "brier": 0.08809821955380907
+      }
+    ],
+    "pooled_b2_b5": {
+      "auc": 0.7273858201321965,
+      "ndcg": 0.6545707539228096,
+      "brier": 0.08762540638565626,
+      "baseline_ndcg": 0.6298901749920405,
+      "ndcg_lift_over_baseline": 0.024680578930769137,
+      "tau_20th_percentile": 0.09857010114178541,
+      "positive_oof_count_used_for_tau": 120841,
+      "total_oof_examples": 1162473
+    }
+  },
+  "production_model": {
+    "fit_row_count": 1457625,
+    "convergence_status": "converged",
+    "number_of_iterations": 17,
+    "feature_count": 13,
+    "intercept": -1.9521634255464821
+  },
+  "runtime_seconds": {
+    "user_profiles": 5.29,
+    "popularity_index": 0.9,
+    "feature_extraction": 33.07,
+    "oof_fitting": 10.6,
+    "production_fitting": 0.97,
+    "total_train_pipeline": 51.5
+  },
+  "generated_files": [
+    {
+      "path": "cache/train/train_manifest.json",
+      "size_bytes": 7826,
+      "sha256": "b76cf718d39f67b35d047420e83fb8f1cf5cc7670ae0fe335683ff24043b955b"
+    },
+    {
+      "path": "cache/train/user_profiles.parquet",
+      "size_bytes": 272004,
+      "sha256": "8e2d2f819dd71f2b4bee467b034a3fc5a8b408be953d3d97242f4f44e9cc062b"
+    },
+    {
+      "path": "cache/train/click_index.npz",
+      "size_bytes": 1560754,
+      "sha256": "c7e6fe2e14ca3500a2c32245361c5ec32d72f96195bfa3b902e43f210620dde6"
+    },
+    {
+      "path": "cache/train/train_relevance_examples.parquet",
+      "size_bytes": 49160405,
+      "sha256": "9d0dcf2919810b3c5150c8746a07d5bb147cfe8eeea7fc7a3186d49eab67223c"
+    },
+    {
+      "path": "cache/train/oof_predictions.parquet",
+      "size_bytes": 13362956,
+      "sha256": "5d03d973282598e57c21b7c7047e62a2057253deb73a57b93e32eb96e1c846d7"
+    },
+    {
+      "path": "cache/train/tau.json",
+      "size_bytes": 691,
+      "sha256": "c51de88b92a92463231f3c2d9bc827d7cca452ab184cc5aac3894154394cda69"
+    },
+    {
+      "path": "cache/train/relevance_model.joblib",
+      "size_bytes": 2437,
+      "sha256": "d6d2b7eddd69b71bb82e552ef5441c0878dcc1a22ce2e9e6fc2bb2d1325ed121"
+    },
+    {
+      "path": "cache/train/relevance_model_metadata.json",
+      "size_bytes": 3466,
+      "sha256": "eafcabf830a7c98c39ca7a85034a8edbee885c9ff86d30cb8f2248028060454d"
+    },
+    {
+      "path": "cache/embeddings/contrastive_norm.npy",
+      "size_bytes": 63707264,
+      "sha256": "5e538e1d84965740ffc747b6684738fc606567520f7fb71647dc401000cde98d"
+    },
+    {
+      "path": "cache/embeddings/contrastive_ids.npy",
+      "size_bytes": 83080,
+      "sha256": "a2b4c74efc5cc2aba601db9f85ab75855e0bdc93b7d9fc30d224f9e676347b0e"
+    },
+    {
+      "path": "cache/embeddings/bert_norm.npy",
+      "size_bytes": 63707264,
+      "sha256": "f9e41e09b945fdd43b48069010ed31ff0bb4c1aaaaf4083f3b07d36eee8016db"
+    },
+    {
+      "path": "cache/embeddings/bert_ids.npy",
+      "size_bytes": 83080,
+      "sha256": "692e5cbde21c21e241e4263b2cf7d1a4ad67ef25aca08b18832c50afb011da1e"
+    },
+    {
+      "path": "outputs/relevance_model_train_metrics.json",
+      "size_bytes": 691,
+      "sha256": "c51de88b92a92463231f3c2d9bc827d7cca452ab184cc5aac3894154394cda69"
+    },
+    {
+      "path": "outputs/train_fold_diagnostics.json",
+      "size_bytes": 2906,
+      "sha256": "2b5b0b3480b7c8b0f00a12e87fb0b169850164b790c62ea69e6630ddae95d5ee"
+    },
+    {
+      "path": "outputs/deviations_from_protocol.md",
+      "size_bytes": 3672,
+      "sha256": "bd1fe175eeb6b50bd9b53f541791402414a1d13fed1f196d8fe4061a8bbc9aba"
+    }
+  ],
+  "audit_status": "Train-side pipeline complete. Validation outcomes remain untouched.",
+  "headroom_qualification_note": "Train diagnostics clear the numerical thresholds, but Headroom qualification remains pending held-out validation.",
+  "brier_note": "OOF Brier score = 0.0876."
+}

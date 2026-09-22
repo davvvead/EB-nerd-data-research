@@ -1,0 +1,109 @@
+{
+  "model_class": "sklearn.linear_model.LogisticRegression",
+  "preprocessing": {
+    "continuous_numeric": {
+      "features": [
+        "sim_to_history",
+        "category_affinity",
+        "topic_affinity",
+        "log_age_hours",
+        "log_clicks_24h",
+        "is_premium",
+        "is_subscriber",
+        "premium_x_subscriber",
+        "time_of_day_sin",
+        "time_of_day_cos"
+      ],
+      "scaler": "StandardScaler",
+      "means": {
+        "sim_to_history": 0.6251078436345018,
+        "category_affinity": 0.21902967283017802,
+        "topic_affinity": 0.13350610216833353,
+        "log_age_hours": 2.60805837387925,
+        "log_clicks_24h": 3.927678713529456,
+        "is_premium": 0.21467387016550896,
+        "is_subscriber": 0.0698012177343281,
+        "premium_x_subscriber": 0.017158048194837492,
+        "time_of_day_sin": 0.014424541980035819,
+        "time_of_day_cos": -0.17886342943917927
+      },
+      "scales": {
+        "sim_to_history": 0.15283607682420633,
+        "category_affinity": 0.15163349133964615,
+        "topic_affinity": 0.07588468670248841,
+        "log_age_hours": 2.724956522744383,
+        "log_clicks_24h": 1.6755801329134279,
+        "is_premium": 0.4105959079602124,
+        "is_subscriber": 0.25481171036106864,
+        "premium_x_subscriber": 0.1298601154203287,
+        "time_of_day_sin": 0.7852006340583428,
+        "time_of_day_cos": 0.5926717025840122
+      }
+    },
+    "categorical": {
+      "features": [
+        "device_type"
+      ],
+      "encoder": "OneHotEncoder(handle_unknown=\"ignore\", sparse_output=False)",
+      "categories": {
+        "device_type": [
+          "1",
+          "2",
+          "3"
+        ]
+      }
+    }
+  },
+  "logistic_regression_parameters": {
+    "C": 1.0,
+    "class_weight": null,
+    "dual": false,
+    "fit_intercept": true,
+    "intercept_scaling": 1,
+    "l1_ratio": null,
+    "max_iter": 1000,
+    "multi_class": "deprecated",
+    "n_jobs": null,
+    "penalty": "l2",
+    "random_state": 20260919,
+    "solver": "lbfgs",
+    "tol": 0.0001,
+    "verbose": 0,
+    "warm_start": false
+  },
+  "convergence": {
+    "n_iter": 17,
+    "converged": true
+  },
+  "intercept": -1.9521634255464821,
+  "coefficients": {
+    "sim_to_history": 0.17547973479999746,
+    "category_affinity": 0.12149485494432848,
+    "topic_affinity": 0.23247013204945105,
+    "log_age_hours": -0.46996068660182566,
+    "log_clicks_24h": 0.7293731639501132,
+    "is_premium": -0.2948244781735105,
+    "is_subscriber": -0.0380163427103944,
+    "premium_x_subscriber": 0.13614943508479171,
+    "time_of_day_sin": -0.0029581862478129024,
+    "time_of_day_cos": 0.0023612303797092143,
+    "device_type_1": -0.5842533680445149,
+    "device_type_2": -0.7092409022331037,
+    "device_type_3": -0.6578750704940556
+  },
+  "training_counts": {
+    "fit_rows": 1457625,
+    "positives": 151064,
+    "negatives": 1306561,
+    "positive_rate": 0.1036370808678501,
+    "feature_count": 13
+  },
+  "audit_provenance": {
+    "protocol_commit_hash": "cb14d50736d1b8c8202b1aa67158e15c3eabb804",
+    "preoutcome_gate_commit_hash": "db8d1003358f50d51e66672ca3a6a8e8f02d1c0a",
+    "implementation_lock_commit_hash": "083e93104483658b6418900770de7d357665c8e8",
+    "current_code_commit_hash": "083e93104483658b6418900770de7d357665c8e8",
+    "seed": 20260919
+  },
+  "causal_interpretation_warning": "Model coefficients reflect statistical associations within exposed slates and must not be interpreted causally."
+}

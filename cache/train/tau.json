@@ -1,0 +1,21 @@
+{
+  "frozen_tau": 0.09857010114178541,
+  "derivation_rule": "20th percentile of out-of-fold predicted relevance among clicked items in train blocks B2..B5",
+  "oof_auc": 0.7273858201321965,
+  "oof_ndcg": 0.6545707539228096,
+  "oof_brier": 0.08762540638565626,
+  "baseline_ndcg": 0.6298901749920405,
+  "ndcg_lift_over_baseline": 0.024680578930769137,
+  "sample_counts": {
+    "total_oof_examples": 1162473,
+    "clicked_oof_examples": 120841,
+    "unclicked_oof_examples": 1041632
+  },
+  "clicked_score_distribution": {
+    "min": 0.0010232864508507246,
+    "p20_tau": 0.09857010114178541,
+    "median": 0.14575172682085102,
+    "mean": 0.15442787870180544,
+    "max": 0.841300253257831
+  }
+}

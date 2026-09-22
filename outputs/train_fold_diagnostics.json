@@ -1,0 +1,88 @@
+{
+  "purpose": "Train forward-chaining fold stability diagnostics",
+  "blocks": [
+    {
+      "block": "B1",
+      "start_timestamp": "2023-05-18 07:00:01+00:00",
+      "end_timestamp": "2023-05-19 12:10:58+00:00",
+      "impressions": 30098,
+      "examples": 295152,
+      "positives": 30223,
+      "positive_rate": 0.10239808640971432
+    },
+    {
+      "block": "B2",
+      "start_timestamp": "2023-05-19 12:10:59+00:00",
+      "end_timestamp": "2023-05-20 21:48:54+00:00",
+      "impressions": 30098,
+      "examples": 293455,
+      "positives": 30226,
+      "positive_rate": 0.10300046003646215,
+      "auc": 0.733542751893016,
+      "ndcg": 0.6586956760067221,
+      "baseline_ndcg": 0.645247239925432,
+      "ndcg_lift_over_baseline": 0.013448436081290094,
+      "brier": 0.08674204875244251
+    },
+    {
+      "block": "B3",
+      "start_timestamp": "2023-05-20 21:48:58+00:00",
+      "end_timestamp": "2023-05-22 09:58:41+00:00",
+      "impressions": 30098,
+      "examples": 291580,
+      "positives": 30196,
+      "positive_rate": 0.10355991494615543,
+      "auc": 0.7277130445878448,
+      "ndcg": 0.6592363277706351,
+      "baseline_ndcg": 0.6179913370954319,
+      "ndcg_lift_over_baseline": 0.041244990675203264,
+      "brier": 0.08711539472953962
+    },
+    {
+      "block": "B4",
+      "start_timestamp": "2023-05-22 09:58:44+00:00",
+      "end_timestamp": "2023-05-23 17:53:45+00:00",
+      "impressions": 30098,
+      "examples": 287616,
+      "positives": 30225,
+      "positive_rate": 0.10508803404539385,
+      "auc": 0.7258543460987038,
+      "ndcg": 0.6527782026590417,
+      "baseline_ndcg": 0.6293912322706081,
+      "ndcg_lift_over_baseline": 0.023386970388433626,
+      "brier": 0.08856729854368946
+    },
+    {
+      "block": "B5",
+      "start_timestamp": "2023-05-23 17:53:52+00:00",
+      "end_timestamp": "2023-05-25 06:59:58+00:00",
+      "impressions": 30100,
+      "examples": 289822,
+      "positives": 30194,
+      "positive_rate": 0.10418118707344508,
+      "auc": 0.7240748652982008,
+      "ndcg": 0.6475732742345509,
+      "baseline_ndcg": 0.6269310873068767,
+      "ndcg_lift_over_baseline": 0.020642186927674167,
+      "brier": 0.08809821955380907
+    }
+  ],
+  "pooled_b2_b5": {
+    "auc": 0.7273858201321965,
+    "ndcg": 0.6545707539228096,
+    "baseline_ndcg": 0.6298901749920405,
+    "ndcg_lift_over_baseline": 0.024680578930769137,
+    "brier": 0.08762540638565626,
+    "tau": 0.09857010114178541,
+    "positive_count_used_for_tau": 120841,
+    "total_examples": 1162473
+  },
+  "qualification_gate_assessment": {
+    "minimum_auc_required": 0.6,
+    "minimum_ndcg_lift_required": 0.01,
+    "train_oof_auc_cleared": true,
+    "train_oof_ndcg_lift_cleared": true,
+    "headroom_status_note": "Train diagnostics clear the numerical thresholds, but Headroom qualification remains pending held-out validation.",
+    "brier_note": "OOF Brier score = 0.0876."
+  }
+}
